@@ -114,7 +114,7 @@ export default function MobileHome() {
         <div className="w-full max-w-2xl mx-auto mt-4">
           {/* Features Section (pag.tsx) */}
           <div className="mb-8">
-            <div className="text-2xl font-bold text-green-700 mb-4 text-center">Features</div>
+            <div className="text-2xl font-bold text-white mb-4 text-center">Features</div>
             <div className="w-full flex justify-center mb-4">
               <Swiper
                 spaceBetween={10}

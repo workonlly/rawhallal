@@ -40,6 +40,7 @@ export default function Home() {
   return (
     <div className="  h-[88%] bg-white/20 w-full mt-11  text-center overflow-auto rounded-sm scrollbar-custom  ">
       <main className="">
+      
         <div className="swiper">
           {/* Swiper for all images from all folders */}
           <Swiper
