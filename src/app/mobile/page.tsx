@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import '../globals.css';
 import supabase from '../../../supabase';
-import { fresh, chicken, fish, mutton } from '../data/page';
+import { fresh, chicken, fish, mutton } from '../data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';

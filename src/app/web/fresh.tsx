@@ -1,7 +1,7 @@
 import React, { use } from 'react'
 import { useEffect, useState } from 'react'
 import supabase  from '../../../supabase'
-import{fish,chicken,mutton} from '../data/page'
+import{fish,chicken,mutton} from '../data/api'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react'
 import supabase  from '../../../supabase'
-import { fresh } from '../data/page';
+import { fresh } from '../data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';

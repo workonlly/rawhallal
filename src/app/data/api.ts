@@ -14,7 +14,7 @@ type SupabaseStorageItem = {
   metadata: object | null;
 };
 
-export async function fresh() {
+export  async function fresh() {
   const bucket = 'fresh';
   const folderMap: Record<string, string[]> = {};
 
