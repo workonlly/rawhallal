@@ -41,13 +41,13 @@ export default function Home() {
     <div className="  h-[88%] bg-white/20 w-full mt-11  text-center overflow-auto rounded-sm scrollbar-custom  ">
       <main className="">
       
-        <div className="swiper">
+        <div className="swiper mt-5">
           {/* Swiper for all images from all folders */}
           <Swiper
             spaceBetween={10}
             slidesPerView={1}
             loop={true}
-            autoplay={{ delay: 1500, disableOnInteraction: true }}
+            autoplay={{ delay: 1500, disableOnInteraction: false }}
             modules={[Autoplay]}
             style={{ width: '100%', height: '320px', maxWidth: 900, margin: '0 auto' }}
           >
@@ -113,8 +113,9 @@ export default function Home() {
                 <div className="w-full mt-2 flex flex-col items-center">
                   <div className="text-lg font-bold text-green-700 mb-2">₹{product.price}</div>
                   <a
-                    href="#"
+                    href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                     className="w-full h-[44px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     Order via WhatsApp
                     <img

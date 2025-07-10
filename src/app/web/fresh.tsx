@@ -101,8 +101,9 @@ function Fresh() {
                                   <div className='mt-4'>
                                     <div className="text-xl font-bold text-center text-green-700 mt-2">₹{items.price}</div>
                                     <a
-                                      href="#"
+                                      href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                                       className="mt-6 w-full h-[7vh] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
+                                      target="_blank" rel="noopener noreferrer"
                                     >
                                       Order via WhatsApp
                                       <img
@@ -161,8 +162,9 @@ function Fresh() {
                                   <div className='mt-4'>
                                     <div className="text-xl font-bold text-center text-green-700 mt-2">₹{items.price}</div>
                                     <a
-                                      href="#"
+                                      href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                                       className="mt-6 w-full h-[7vh] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
+                                      target="_blank" rel="noopener noreferrer"
                                     >
                                       Order via WhatsApp
                                       <img
@@ -221,8 +223,9 @@ function Fresh() {
                                   <div className='mt-4'>
                                     <div className="text-xl font-bold text-center text-green-700 mt-2">₹{items.price}</div>
                                     <a
-                                      href="#"
+                                      href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                                       className="mt-6 w-full h-[7vh] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
+                                      target="_blank" rel="noopener noreferrer"
                                     >
                                       Order via WhatsApp
                                       <img

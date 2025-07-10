@@ -182,8 +182,9 @@ export default function MobileHome() {
                     <div className="w-full flex flex-col items-center">
                       <div className="text-base font-bold text-green-700 mb-2">₹{product.price}</div>
                       <a
-                        href="#"
+                        href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                         className="w-full h-[36px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-200 shadow"
+                        target="_blank" rel="noopener noreferrer"
                       >
                         Order via WhatsApp
                         <img
@@ -253,8 +254,9 @@ export default function MobileHome() {
                     <div className="w-full flex flex-col items-center">
                       <div className="text-base font-bold text-green-700 mb-2">₹{items.price}</div>
                       <a
-                        href="#"
+                        href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                         className="w-full h-[36px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-200 shadow"
+                        target="_blank" rel="noopener noreferrer"
                       >
                         Order via WhatsApp
                         <img
@@ -324,8 +326,9 @@ export default function MobileHome() {
                     <div className="w-full flex flex-col items-center">
                       <div className="text-base font-bold text-green-700 mb-2">₹{items.price}</div>
                       <a
-                        href="#"
+                        href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                         className="w-full h-[36px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-200 shadow"
+                        target="_blank" rel="noopener noreferrer"
                       >
                         Order via WhatsApp
                         <img
@@ -395,8 +398,9 @@ export default function MobileHome() {
                     <div className="w-full flex flex-col items-center">
                       <div className="text-base font-bold text-green-700 mb-2">₹{items.price}</div>
                       <a
-                        href="#"
+                        href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
                         className="w-full h-[36px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-200 shadow"
+                        target="_blank" rel="noopener noreferrer"
                       >
                         Order via WhatsApp
                         <img
