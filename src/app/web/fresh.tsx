@@ -8,6 +8,7 @@ import 'swiper/css';
 import { useDispatch } from 'react-redux';
 import { setSelectedProduct } from '../store/productSlice';
 import { useRouter } from 'next/navigation';
+import Footer from './footer';
 
 interface Product {
   id: number;
@@ -295,6 +296,7 @@ function Fresh() {
                        </div>
     
                      </main>
+      <Footer />
     </div>   
   )
 }

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setSelectedProduct } from '../store/productSlice'; // Corrected path
 import { useRouter } from 'next/navigation';
 import { SelectedProduct } from '../store/types';
+import Footer from './footer';
 
 interface Product {
   id: number;
@@ -145,7 +146,9 @@ export default function Home() {
               </div>
             );
           })}
+           
         </div>
+        <Footer />
       </main>
     </div>
   );
