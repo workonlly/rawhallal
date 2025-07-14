@@ -89,7 +89,7 @@ export default function Home() {
                 onClick={() => {
                   dispatch(setSelectedProduct({
                     id: product.id,
-                    table: 'chicken', // Change as needed for other product types
+                    table: 'fresh', 
                     maintext: product.maintext,
                     sectext: product.sectext,
                     price: product.price,
