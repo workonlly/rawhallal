@@ -5,6 +5,9 @@ import{fish,chicken,mutton} from '../data/api'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { useDispatch } from 'react-redux';
+import { setSelectedProduct } from '../store/productSlice';
+import { useRouter } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -22,6 +25,8 @@ function Fresh() {
   const [chickenImages, setChickenImages] = useState<Record<string, string[]>>({});
   const [fishImages, setFishImages] = useState<Record<string, string[]>>({});
   const [muttonImages, setMuttonImages] = useState<Record<string, string[]>>({});
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -62,14 +67,37 @@ function Fresh() {
     <div className="  h-[88%] bg-white/20 w-full mt-11  text-center overflow-auto rounded-sm scrollbar-custom  ">
                     <main id="chick">
                         <div className="text-3xl font-bold text-white m-5 ">CHICKEN </div>
-                        <div className="rounded-md   flex items-center justify-center"> <iframe src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"  width="560" height="315" ></iframe></div>
+                        
+                        <div className="rounded-md   flex items-center justify-center"> <iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/9F4W-m0gwVw"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+</div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
                           {
                             chickenProducts.map((items) => {
                               const folderName = String(items.id);
                               const urls = chickenImages[folderName] || [];
                               return (
-                                <div className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100">
+                                <div
+                                  className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
+                                  onClick={() => {
+                                    dispatch(setSelectedProduct({
+                                      id: items.id,
+                                      table: 'chicken',
+                                      maintext: items.maintext,
+                                      sectext: items.sectext,
+                                      price: items.price,
+                                      image: (urls[0] || ''),
+                                    }));
+                                    router.push('/open');
+                                  }}
+                                >
                                   <div className="space-y-4">
                                     <Swiper
                                       spaceBetween={10}
@@ -123,14 +151,27 @@ function Fresh() {
 
                     <main id="fish">
                         <div className="text-3xl font-bold text-white m-5 ">Fresh fish </div>
-                        <div className="rounded-md   flex items-center justify-center"> <iframe src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"  width="560" height="315" ></iframe></div>
+                        <div className="rounded-md   flex items-center justify-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/UhhBfux2JDM?si=uhYTV1J04PTi9o6s" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe></div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
                           {
                             fishProducts.map((items) => {
                               const folderName = String(items.id);
                               const urls = fishImages[folderName] || [];
                               return (
-                                <div className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100">
+                                <div
+                                  className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
+                                  onClick={() => {
+                                    dispatch(setSelectedProduct({
+                                      id: items.id,
+                                      table: 'fish',
+                                      maintext: items.maintext,
+                                      sectext: items.sectext,
+                                      price: items.price,
+                                      image: (urls[0] || ''),
+                                    }));
+                                    router.push('/open');
+                                  }}
+                                >
                                   <div className="space-y-4">
                                     <Swiper
                                       spaceBetween={10}
@@ -184,14 +225,27 @@ function Fresh() {
 
                     <main id="mutton">
                         <div className="text-3xl font-bold text-white m-5 ">fresh mutton</div>
-                        <div className="rounded-md   flex items-center justify-center"> <iframe src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"  width="560" height="315" ></iframe></div>
+                       
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
                           {
                             muttonProducts.map((items) => {
                               const folderName = String(items.id);
                               const urls = muttonImages[folderName] || [];
                               return (
-                                <div className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100">
+                                <div
+                                  className="bg-white/80 backdrop-blur-md p-6 h-[80vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
+                                  onClick={() => {
+                                    dispatch(setSelectedProduct({
+                                      id: items.id,
+                                      table: 'mutton',
+                                      maintext: items.maintext,
+                                      sectext: items.sectext,
+                                      price: items.price,
+                                      image: (urls[0] || ''),
+                                    }));
+                                    router.push('/open');
+                                  }}
+                                >
                                   <div className="space-y-4">
                                     <Swiper
                                       spaceBetween={10}

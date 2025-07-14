@@ -5,6 +5,9 @@ import { fresh } from '../data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { useDispatch } from 'react-redux';
+import { setSelectedProduct } from '../store/productSlice'; // Corrected path
+import { useRouter } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -16,6 +19,8 @@ interface Product {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [folderMap, setFolderMap] = useState<Record<string, string[]>>({});
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -77,8 +82,19 @@ export default function Home() {
             return (
               <div
                 key={product.id}
-                className="bg-white/90 p-4 rounded-2xl shadow-lg flex flex-col items-center justify-between border border-green-100 hover:scale-105 transition-transform duration-300 hover:shadow-xl min-h-[480px] max-h-[540px] h-full"
+                className="bg-white/90 p-4 rounded-2xl shadow-lg flex flex-col items-center justify-between border border-green-100 hover:scale-105 transition-transform duration-300 hover:shadow-xl min-h-[480px] max-h-[540px] h-full cursor-pointer"
                 style={{ boxSizing: 'border-box' }}
+                onClick={() => {
+                  dispatch(setSelectedProduct({
+                    id: product.id,
+                    table: 'chicken', // Change as needed for other product types
+                    maintext: product.maintext,
+                    sectext: product.sectext,
+                    price: product.price,
+                    image: (urls[0] || ''),
+                  }));
+                  router.push('/open');
+                }}
               >
                 <div className="w-full flex justify-center items-center mb-3">
                   <Swiper

@@ -9,6 +9,9 @@ import { fresh, chicken, fish, mutton } from '../data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { useDispatch } from 'react-redux';
+import { setSelectedProduct } from '../store/productSlice'; // Corrected path
+import { useRouter } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -27,6 +30,9 @@ export default function MobileHome() {
   const [chickenImages, setChickenImages] = useState<Record<string, string[]>>({});
   const [fishImages, setFishImages] = useState<Record<string, string[]>>({});
   const [muttonImages, setMuttonImages] = useState<Record<string, string[]>>({});
+
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   // Fetch features (fresh1 table)
   useEffect(() => {
@@ -150,6 +156,17 @@ export default function MobileHome() {
                   <div
                     key={product.id}
                     className="bg-white p-3 rounded-xl shadow flex flex-col items-center border border-green-100 min-h-[270px] max-h-[420px] mx-2"
+                    onClick={() => {
+                      dispatch(setSelectedProduct({
+                        id: product.id,
+                        table: 'chicken', // Change as needed for other product types
+                        maintext: product.maintext,
+                        sectext: product.sectext,
+                        price: product.price,
+                        image: (urls[0] || ''),
+                      }));
+                      router.push('/open');
+                    }}
                   >
                     <div className="w-full flex justify-center items-center mb-2">
                       <Swiper
