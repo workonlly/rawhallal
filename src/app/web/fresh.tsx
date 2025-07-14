@@ -93,7 +93,7 @@ function Fresh() {
                                       maintext: items.maintext,
                                       sectext: items.sectext,
                                       price: items.price,
-                                      image: (urls[0] || ''),
+                                      image: urls,
                                     }));
                                     router.push('/open');
                                   }}
@@ -167,7 +167,7 @@ function Fresh() {
                                       maintext: items.maintext,
                                       sectext: items.sectext,
                                       price: items.price,
-                                      image: (urls[0] || ''),
+                                      image: urls,
                                     }));
                                     router.push('/open');
                                   }}
@@ -241,7 +241,7 @@ function Fresh() {
                                       maintext: items.maintext,
                                       sectext: items.sectext,
                                       price: items.price,
-                                      image: (urls[0] || ''),
+                                      image: urls,
                                     }));
                                     router.push('/open');
                                   }}

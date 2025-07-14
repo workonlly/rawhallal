@@ -163,7 +163,7 @@ export default function MobileHome() {
                         maintext: product.maintext,
                         sectext: product.sectext,
                         price: product.price,
-                        image: (urls[0] || ''),
+                        image: urls,
                       }));
                       router.push('/open');
                     }}

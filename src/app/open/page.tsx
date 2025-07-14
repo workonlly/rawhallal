@@ -32,12 +32,17 @@ export default function OpenPage() {
         >
           ←
         </button>
-        {product.image ? (
-          <img
-            src={product.image}
-            alt={product.maintext}
-            className="w-60 h-60 object-contain rounded-2xl border border-green-100 bg-white shadow-md mb-4"
-          />
+        {product?.image && product.image.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-6  mb-1 w-full justify-items-center">
+            {product.image.map((img: string, idx: number) => (
+              <img
+                key={img}
+                src={img}
+                alt={product.maintext + ' ' + (idx + 1)}
+                className="w-32 h-32 object-contain rounded-xl  bg-white shadow"
+              />
+            ))}
+          </div>
         ) : (
           <div className="w-60 h-60 flex items-center justify-center text-gray-400 border rounded-2xl bg-gray-50 shadow-md mb-4">
             No image

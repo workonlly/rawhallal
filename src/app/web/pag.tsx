@@ -8,6 +8,7 @@ import 'swiper/css';
 import { useDispatch } from 'react-redux';
 import { setSelectedProduct } from '../store/productSlice'; // Corrected path
 import { useRouter } from 'next/navigation';
+import { SelectedProduct } from '../store/types';
 
 interface Product {
   id: number;
@@ -91,8 +92,8 @@ export default function Home() {
                     maintext: product.maintext,
                     sectext: product.sectext,
                     price: product.price,
-                    image: (urls[0] || ''),
-                  }));
+                    image: urls,
+                  } as SelectedProduct));
                   router.push('/open');
                 }}
               >

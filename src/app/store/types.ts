@@ -4,5 +4,5 @@ export interface SelectedProduct {
   maintext: string;
   sectext: string;
   price: number;
-  image: string;
-} 
+  image: string[] ;
+}  
