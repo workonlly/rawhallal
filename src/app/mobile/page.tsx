@@ -219,12 +219,12 @@ export default function MobileHome() {
 
           {/* Chicken Section */}
           <div className="mb-8">
-            <div id='chicken' className="text-2xl font-bold text-green-700 mb-4 text-center">Chicken</div>
+            <div id='chicken' className="text-2xl font-bold text-white mb-4 text-center">Chicken</div>
             <div className="w-full flex flex-col items-center mb-4">
-              <div className="text-lg font-semibold text-green-700 mb-2">Watch Our Video</div>
+              <div className="text-lg font-semibold text-white mb-2">Watch Our Video</div>
               <div className="w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-lg border-2 border-green-200 bg-black">
                 <iframe
-                  src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"
+                  src="https://www.youtube.com/embed/9F4W-m0gwVw"
                   title="YouTube video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -291,12 +291,12 @@ export default function MobileHome() {
 
           {/* Fish Section */}
           <div id='fish' className="mb-8">
-            <div className="text-2xl font-bold text-green-700 mb-4 text-center">Fish</div>
+            <div className="text-2xl font-bold text-white mb-4 text-center">Fish</div>
             <div className="w-full flex flex-col items-center mb-4">
-              <div className="text-lg font-semibold text-green-700 mb-2">Watch Our Video</div>
+              <div className="text-lg font-semibold text-white mb-2">Watch Our Video</div>
               <div className="w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-lg border-2 border-green-200 bg-black">
                 <iframe
-                  src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"
+                  src="https://www.youtube.com/embed/UhhBfux2JDM?si=uhYTV1J04PTi9o6s"
                   title="YouTube video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -363,19 +363,9 @@ export default function MobileHome() {
 
           {/* Mutton Section */}
           <div id='mutton' className="mb-8">
-            <div className="text-2xl font-bold text-green-700 mb-4 text-center">Mutton</div>
+            <div className="text-2xl font-bold text-white mb-4 text-center">Mutton</div>
             <div className="w-full flex flex-col items-center mb-4">
-              <div className="text-lg font-semibold text-green-700 mb-2">Watch Our Video</div>
-              <div className="w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-lg border-2 border-green-200 bg-black">
-                <iframe
-                  src="https://youtu.be/9F4W-m0gwVw?si=JDZkceGUFTWhJLvK"
-                  title="YouTube video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                  style={{ minHeight: '180px', border: 'none' }}
-                />
-              </div>
+              
             </div>
             <div className="grid grid-cols-1 gap-4">
               {muttonProducts.map((items) => {
