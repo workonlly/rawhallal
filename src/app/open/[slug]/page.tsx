@@ -63,8 +63,8 @@ async function searchProductBySlug(searchSlug: string) {
   return null;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   
   // Search for product by slug
@@ -142,8 +142,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-async function page({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+async function page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   
   // Search for product by slug to get the heading
   const product = await searchProductBySlug(slug);
