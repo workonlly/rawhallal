@@ -1,4 +1,4 @@
-import supabase from "../../../supabase";
+import supabase from "../../../../supabase";
 
 export async function generateMetadata() {
 
@@ -6,8 +6,8 @@ export async function generateMetadata() {
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 111) 
-    .eq('table','home')
+    .eq('id', 116) 
+    .eq('table','contact')
     .single();
 
 
@@ -75,18 +75,18 @@ export async function generateMetadata() {
     manifest: '/site.webmanifest',
   };
 }
+import Contactus from '../contactus'
 
-import Home from "./pag";
 export default async function PageContent() {
   // Get the specific row by ID only
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 111) 
+    .eq('id', 116) 
     .single();
 
-  const pageHeading = data?.heading || 'Fresh and halal chicken products';
-
+  const pageHeading = data?.heading || 'Franchise Opportunities';
+  
   return (
     <div className='relative h-screen w-screen'>
       <div className='animated-bg h-screen w-screen relative p-1'>
@@ -98,11 +98,11 @@ export default async function PageContent() {
             <div className="w-[100%] h-full rounded-sm p-[5px] flex flex-col gap-3 backdrop-blur-md overflow-y-auto"> {/*alining div */}
             <div className="animated-bg h-[10vh] p-[5vh] flex flex-col justify-center items-center font-bold rounded-xl text-white  ">Raw  Chicken </div>
               <div className="flex flex-col gap-2">
-                <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center  pl-5 rounded-r-xl  font-semibold hover:shadow-xl">🏠Home</div>                
+               <a href="/web"> <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center  pl-5 rounded-r-xl  font-semibold hover:shadow-xl">🏠Home</div> </a>             
                 <a href="/web/chicken" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center  font-semibold ml-5 " > 🍗Chicken</div></a>
                 <a href="/web/fish" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold ml-5 " > 🐟Raw fresh fish</div></a>
                 <a href="/web/mutton" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold text-[15px] ml-5 " > 🐐Raw fresh mutton</div></a>
-                <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">🤝  Franchise options</div>
+               <a href="/web/contact"> <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">🤝  Franchise options</div></a>
                 <a href="/web/bhiryani" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl"   >🤝  Bhiryani</div></a>
                 <a href="/aboutus" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">ABOUT US</div></a>
                 <a href="/privacypolicy" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">PRIVACY POLICY</div></a>
@@ -121,9 +121,9 @@ export default async function PageContent() {
             {/* main logo area end */}
             <div className="h-[2px]  animated-bg absolute w-[93%]  right-0"></div>
            
-    
+      
              {/* working area */}
-              <Home/>
+             <Contactus></Contactus>
 
              {/* working area end */}
           
@@ -137,4 +137,4 @@ export default async function PageContent() {
      
     </div>
   );
-} 
+}

@@ -11,12 +11,16 @@ import { useRouter } from 'next/navigation';
 import { SelectedProduct } from '../store/types';
 import Footer from './footer';
 
+
+
+
 interface Product {
   id: number;
   maintext: string;
   sectext: string;
   price:number;
 }
+
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,21 +35,34 @@ export default function Home() {
       else setProducts(data as Product[])
     };
     fetchProducts();
+    fresh().then(setFolderMap)
   }, []);
 
-  useEffect(() => {
-    const fetchFolders = async () => {
-      const data = await fresh();
-      setFolderMap(data);
-    };
-    fetchFolders();
-  }, []);
+  // Function to create a URL-safe slug from product.maintext with reversible icons
+  function toSlug(text: string) {
+    return text
+      .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
+      .replace(/[\/\\]/g, '_SLASH_') // Replace slashes with _SLASH_
+      .replace(/[()]/g, '_PAREN_') // Replace parentheses with _PAREN_
+      .replace(/[&]/g, '_AND_') // Replace & with _AND_
+      .replace(/[#]/g, '_HASH_') // Replace # with _HASH_
+      .replace(/[@]/g, '_AT_') // Replace @ with _AT_
+      .replace(/[%]/g, '_PERCENT_') // Replace % with _PERCENT_
+      .replace(/[+]/g, '_PLUS_') // Replace + with _PLUS_
+      .replace(/[=]/g, '_EQUALS_') // Replace = with _EQUALS_
+      .replace(/[?]/g, '_QUESTION_') // Replace ? with _QUESTION_
+      .replace(/[!]/g, '_EXCLAMATION_') // Replace ! with _EXCLAMATION_
+      .replace(/[$]/g, '_DOLLAR_') // Replace $ with _DOLLAR_
+      .replace(/[*]/g, '_STAR_') // Replace * with _STAR_
+      .replace(/[,]/g, '_COMMA_') // Replace , with _COMMA_
+      .replace(/[.]/g, '_DOT_') // Replace . with _DOT_
+      .replace(/[:]/g, '_COLON_') // Replace : with _COLON_
+      .replace(/[;]/g, '_SEMICOLON_'); // Replace ; with _SEMICOLON_
+  }
 
-
-  
 
   return (
-    <div className="  h-[88%] bg-white/20 w-full mt-11  text-center overflow-auto rounded-sm scrollbar-custom  ">
+    <div className="  h-[91%] bg-white/20 w-full   text-center overflow-auto rounded-sm scrollbar-custom  ">
       <main className="">
       
         <div className="swiper mt-5">
@@ -84,7 +101,7 @@ export default function Home() {
             return (
               <div
                 key={product.id}
-                className="bg-white/90 p-4 rounded-2xl shadow-lg flex flex-col items-center justify-between border border-green-100 hover:scale-105 transition-transform duration-300 hover:shadow-xl min-h-[480px] max-h-[540px] h-full cursor-pointer"
+                className="bg-white/90 p-4 rounded-2xl shadow-lg flex flex-col items-center justify-between border border-green-100 hover:scale-105 transition-transform duration-300 hover:shadow-xl min-h-[520px] max-h-[580px] h-full cursor-pointer"
                 style={{ boxSizing: 'border-box' }}
                 onClick={() => {
                   dispatch(setSelectedProduct({
@@ -95,7 +112,8 @@ export default function Home() {
                     price: product.price,
                     image: urls,
                   } as SelectedProduct));
-                  router.push('/open');
+                  const slug = toSlug(product.maintext);
+                  router.push(`/open/${slug}`); // Use custom slug
                 }}
               >
                 <div className="w-full flex justify-center items-center mb-3">
@@ -132,12 +150,12 @@ export default function Home() {
                   <div className="text-lg font-bold text-green-700 mb-2">₹{product.price}</div>
                   <a
                     href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
-                    className="w-full h-[44px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
+                    className="w-full h-[48px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
                     target="_blank" rel="noopener noreferrer"
                   >
                     Order via WhatsApp
                     <img
-                      src="./WhatsApp.svg.webp"
+                      src="/WhatsApp.svg.webp"
                       alt="whatsapp"
                       className="h-[22px] ml-2"
                     />

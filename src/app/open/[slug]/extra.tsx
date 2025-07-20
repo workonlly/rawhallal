@@ -1,7 +1,7 @@
 'use client';
 import { useSelector } from 'react-redux';
-import { selectSelectedProduct } from '../store/productSlice'; // Corrected path
-import { SelectedProduct } from '../store/types';
+import { selectSelectedProduct } from '../../store/productSlice';
+import { SelectedProduct } from '../../store/types';
 import { useRouter } from 'next/navigation';
 
 export default function OpenPage() {

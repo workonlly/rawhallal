@@ -1,4 +1,4 @@
-import supabase from "../../../supabase";
+import supabase from "../../../../supabase";
 
 export async function generateMetadata() {
 
@@ -6,8 +6,8 @@ export async function generateMetadata() {
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 111) 
-    .eq('table','home')
+    .eq('id', 113) 
+    .eq('table','chicken')
     .single();
 
 
@@ -76,13 +76,13 @@ export async function generateMetadata() {
   };
 }
 
-import Home from "./pag";
+import Chicken from "../chicken";
 export default async function PageContent() {
   // Get the specific row by ID only
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 111) 
+    .eq('id', 113) 
     .single();
 
   const pageHeading = data?.heading || 'Fresh and halal chicken products';
@@ -98,7 +98,7 @@ export default async function PageContent() {
             <div className="w-[100%] h-full rounded-sm p-[5px] flex flex-col gap-3 backdrop-blur-md overflow-y-auto"> {/*alining div */}
             <div className="animated-bg h-[10vh] p-[5vh] flex flex-col justify-center items-center font-bold rounded-xl text-white  ">Raw  Chicken </div>
               <div className="flex flex-col gap-2">
-                <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center  pl-5 rounded-r-xl  font-semibold hover:shadow-xl">🏠Home</div>                
+              <a href="/web"> <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center  pl-5 rounded-r-xl  font-semibold hover:shadow-xl">🏠Home</div> </a>                 
                 <a href="/web/chicken" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center  font-semibold ml-5 " > 🍗Chicken</div></a>
                 <a href="/web/fish" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold ml-5 " > 🐟Raw fresh fish</div></a>
                 <a href="/web/mutton" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold text-[15px] ml-5 " > 🐐Raw fresh mutton</div></a>
@@ -123,7 +123,7 @@ export default async function PageContent() {
            
     
              {/* working area */}
-              <Home/>
+              <Chicken></Chicken>
 
              {/* working area end */}
           

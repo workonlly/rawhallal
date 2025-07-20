@@ -1,20 +1,18 @@
-import supabase from '../../../supabase';
-import MobileHeader from './MobileHeader';
-import MobileFooter from './MobileFooter';
+import supabase from "../../../../supabase";
 
 export async function generateMetadata() {
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 109) 
-    .eq('table','mobile')
+    .eq('id', 115) 
+    .eq('table','bhiryani')
     .single();
 
   const product = {
     id: data?.id || 'title',
-    name: data?.title || 'Mobile Home',
-    description: data?.metadata || 'Raw Halal Chicken mobile experience.',
-    keywords: Array.isArray(data?.metakeywords) ? data.metakeywords : ['raw', 'halal', 'chicken', 'mobile'],
+    name: data?.title || 'Biryani',
+    description: data?.metadata || 'Authentic biryani coming soon from Raw Halal Chicken.',
+    keywords: Array.isArray(data?.metakeywords) ? data.metakeywords : ['biryani', 'authentic', 'coming soon', 'halal'],
     authorName: 'Raw Halal Chicken',
     imageUrl: '/fdrd-removebg-preview-modified.png',
     altImageUrl: '/fdrd-removebg-preview-modified.png',
@@ -27,13 +25,13 @@ export async function generateMetadata() {
     publisher: 'Raw Halal Chicken',
     
     alternates: {
-      canonical: `https://www.rawhalalchicken.com/mobile`,
+      canonical: `https://www.rawhalalchicken.com/mobile/bhiryani`,
     },
 
     openGraph: {
       title: `${product.name} | Raw Halal Chicken`,
       description: product.description,
-      url: `https://www.rawhalalchicken.com/mobile`,
+      url: `https://www.rawhalalchicken.com/mobile/bhiryani`,
       siteName: 'Raw Halal Chicken',
       images: [
         {
@@ -70,20 +68,19 @@ export async function generateMetadata() {
   };
 }
 
-import MobilePag from './pag';
-
-export default async function MobileHome() {
-  // Get the specific row by ID only
+import Biryani from "../bhiryani";
+import MobileHeader from "../MobileHeader";
+export default async function PageContent() {
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 111) 
+    .eq('id', 115) 
     .single();
 
-  const pageHeading = data?.heading || 'Fresh and halal chicken products';
-  
+  const pageHeading = data?.heading || 'Authentic Biryani Coming Soon';
+
   return (
-    <div className="animated-bg p-1 min-h-screen w-full relative">
+    <div className="animated-bg p-1  min-h-screen w-full relative">
       {/* Black overlay */}
       <div className="absolute inset-0 bg-black/90 z-0 p-2" />
       {/* Centered black content wrapper */}
@@ -92,15 +89,10 @@ export default async function MobileHome() {
         <MobileHeader pageHeading={pageHeading} />
         
         {/* Main Content */}
-        <div className="w-full max-w-2xl mx-auto mt-4 flex-1">
-          <div className="h-full bg-white/20 w-full text-center overflow-auto rounded-sm scrollbar-custom">
-            <MobilePag />
-          </div>
+        <div className="w-full  max-w-2xl mx-auto mt-4">
+          <Biryani />
         </div>
-        
-        {/* Footer */}
-        <MobileFooter />
       </div>
     </div>
   );
-}
+} 

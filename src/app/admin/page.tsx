@@ -8,19 +8,15 @@ function classNames(...classes: string[]) {
 }
 
 const productTables = [
-  { key: 'fresh1', label: 'Features' },
+  { key: 'fresh1', label: 'home' },
   { key: 'chicken', label: 'Chicken' },
   { key: 'fish', label: 'Fish' },
   { key: 'mutton', label: 'Mutton' },
+  { key: 'title', label: 'Title Table' },
 ];
 
 // If you haven't already, install @headlessui/react:
 // npm install @headlessui/react
-
-// Add index signature to sections state
-type SectionMap = {
-  [key: string]: { title: string; iframe: string };
-};
 
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'lacleo2024'; // Change this to your desired password
@@ -34,13 +30,14 @@ export default function AdminPanel() {
   const [form, setForm] = useState({ maintext: '', sectext: '', price: '' });
   const [selectedTable, setSelectedTable] = useState('fresh1');
 
-  // Section Management
-  const [sections, setSections] = useState<SectionMap>({
-    features: { title: 'Features', iframe: '' },
-    chicken: { title: 'Chicken', iframe: '' },
-    fish: { title: 'Fish', iframe: '' },
-    mutton: { title: 'Mutton', iframe: '' },
-  });
+  // SEO Metadata Management
+  const [seoForm, setSeoForm] = useState({ title: '', metadata: '', metakeywords: '', heading: '' });
+  const [editingSeo, setEditingSeo] = useState<{ table: string, product: any } | null>(null);
+
+  // Title Table Management
+  const [titleTableData, setTitleTableData] = useState<any[]>([]);
+  const [titleForm, setTitleForm] = useState({ title: '', metadata: '', metakeywords: '', heading: '' });
+  const [editingTitle, setEditingTitle] = useState<any | null>(null);
 
   // Contact Info
   const [contact, setContact] = useState({ info: '', links: '', email: '' });
@@ -63,6 +60,15 @@ export default function AdminPanel() {
       const { data } = await supabase.from(key).select('*');
       setProducts((prev) => ({ ...prev, [key]: data || [] }));
     });
+  }, []);
+
+  // Fetch title table data
+  useEffect(() => {
+    const fetchTitleData = async () => {
+      const { data } = await supabase.from('title').select('*');
+      setTitleTableData(data || []);
+    };
+    fetchTitleData();
   }, []);
 
   // Check session on mount
@@ -140,16 +146,30 @@ export default function AdminPanel() {
   const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (editing) {
-      await supabase.from(editing.table).update(form).eq('id', editing.product.id);
-    } else {
-      await supabase.from(selectedTable).insert([form]);
+    try {
+      if (editing) {
+        const { error } = await supabase.from(editing.table).update(form).eq('id', editing.product.id);
+        if (error) {
+          alert('Error updating product: ' + error.message);
+          return;
+        }
+        alert('Product updated successfully!');
+      } else {
+        const { error } = await supabase.from(selectedTable).insert([form]);
+        if (error) {
+          alert('Error adding product: ' + error.message);
+          return;
+        }
+        alert('Product added successfully!');
+      }
+      setForm({ maintext: '', sectext: '', price: '' });
+      setEditing(null);
+      // Refresh
+      const { data } = await supabase.from(selectedTable).select('*');
+      setProducts((prev) => ({ ...prev, [selectedTable]: data || [] }));
+    } catch (error) {
+      alert('Error: ' + error);
     }
-    setForm({ maintext: '', sectext: '', price: '' });
-    setEditing(null);
-    // Refresh
-    const { data } = await supabase.from(selectedTable).select('*');
-    setProducts((prev) => ({ ...prev, [selectedTable]: data || [] }));
   };
   const handleEdit = (table: string, product: any) => {
     setEditing({ table, product });
@@ -157,8 +177,126 @@ export default function AdminPanel() {
     setSelectedTable(table);
   };
   const handleDelete = async (table: string, id: number) => {
-    await supabase.from(table).delete().eq('id', id);
-    setProducts((prev) => ({ ...prev, [table]: prev[table].filter((p: any) => p.id !== id) }));
+    try {
+      const { error } = await supabase.from(table).delete().eq('id', id);
+      if (error) {
+        alert('Error deleting product: ' + error.message);
+        return;
+      }
+      setProducts((prev) => ({ ...prev, [table]: prev[table].filter((p: any) => p.id !== id) }));
+      alert('Product deleted successfully!');
+    } catch (error) {
+      alert('Error: ' + error);
+    }
+  };
+
+  // SEO form handlers
+  const handleSeoChange = (e: any) => setSeoForm({ ...seoForm, [e.target.name]: e.target.value });
+  const handleSeoSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      // Prepare data for Supabase - handle empty strings
+      const seoData = {
+        title: seoForm.title || null,
+        metadata: seoForm.metadata || null,
+        metakeywords: seoForm.metakeywords ? seoForm.metakeywords.split(',').map(k => k.trim()).filter(k => k) : null,
+        heading: seoForm.heading || null
+      };
+
+      if (editingSeo) {
+        const { error } = await supabase.from(editingSeo.table).update(seoData).eq('id', editingSeo.product.id);
+        if (error) {
+          alert('Error updating SEO: ' + error.message);
+          return;
+        }
+        alert('SEO updated successfully!');
+      }
+      setSeoForm({ title: '', metadata: '', metakeywords: '', heading: '' });
+      setEditingSeo(null);
+      // Refresh
+      const { data } = await supabase.from(selectedTable).select('*');
+      setProducts((prev) => ({ ...prev, [selectedTable]: data || [] }));
+    } catch (error) {
+      alert('Error: ' + error);
+    }
+  };
+  const handleSeoEdit = (table: string, product: any) => {
+    setEditingSeo({ table, product });
+    setSeoForm({ 
+      title: product.title || '', 
+      metadata: product.metadata || '', 
+      metakeywords: Array.isArray(product.metakeywords) ? product.metakeywords.join(', ') : (product.metakeywords || ''),
+      heading: product.heading || ''
+    });
+    setSelectedTable(table);
+  };
+  const handleSeoCancel = () => {
+    setSeoForm({ title: '', metadata: '', metakeywords: '', heading: '' });
+    setEditingSeo(null);
+  };
+
+  // Title table form handlers
+  const handleTitleChange = (e: any) => setTitleForm({ ...titleForm, [e.target.name]: e.target.value });
+  const handleTitleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      // Prepare data for Supabase - handle empty strings
+      const titleData = {
+        title: titleForm.title || null,
+        metadata: titleForm.metadata || null,
+        metakeywords: titleForm.metakeywords ? titleForm.metakeywords.split(',').map(k => k.trim()).filter(k => k) : null,
+        heading: titleForm.heading || null
+      };
+
+      if (editingTitle) {
+        const { error } = await supabase.from('title').update(titleData).eq('id', editingTitle.id);
+        if (error) {
+          alert('Error updating title: ' + error.message);
+          return;
+        }
+        alert('Title updated successfully!');
+      } else {
+        const { error } = await supabase.from('title').insert([titleData]);
+        if (error) {
+          alert('Error adding title: ' + error.message);
+          return;
+        }
+        alert('Title added successfully!');
+      }
+      setTitleForm({ title: '', metadata: '', metakeywords: '', heading: '' });
+      setEditingTitle(null);
+      // Refresh title data
+      const { data } = await supabase.from('title').select('*');
+      setTitleTableData(data || []);
+    } catch (error) {
+      alert('Error: ' + error);
+    }
+  };
+  const handleTitleEdit = (item: any) => {
+    setEditingTitle(item);
+    setTitleForm({ 
+      title: item.title || '', 
+      metadata: item.metadata || '', 
+      metakeywords: Array.isArray(item.metakeywords) ? item.metakeywords.join(', ') : (item.metakeywords || ''),
+      heading: item.heading || ''
+    });
+  };
+  const handleTitleCancel = () => {
+    setTitleForm({ title: '', metadata: '', metakeywords: '', heading: '' });
+    setEditingTitle(null);
+  };
+  const handleTitleDelete = async (id: number) => {
+    try {
+      const { error } = await supabase.from('title').delete().eq('id', id);
+      if (error) {
+        alert('Error deleting title: ' + error.message);
+        return;
+      }
+      setTitleTableData(prev => prev.filter(item => item.id !== id));
+      alert('Title deleted successfully!');
+    } catch (error) {
+      alert('Error: ' + error);
+    }
   };
 
   // Image upload handlers
@@ -169,13 +307,22 @@ export default function AdminPanel() {
   const handleImageUpload = async (bucket: string, folder: string) => {
     if (!imageFiles) return;
     setUploading(true);
-    for (const file of Array.from(imageFiles)) {
-      await supabase.storage.from(bucket).upload(`${folder}/${file.name}`, file, { upsert: true });
+    try {
+      for (const file of Array.from(imageFiles)) {
+        const { error } = await supabase.storage.from(bucket).upload(`${folder}/${file.name}`, file, { upsert: true });
+        if (error) {
+          alert('Error uploading image: ' + error.message);
+          return;
+        }
+      }
+      alert('Upload complete!');
+    } catch (error) {
+      alert('Error uploading: ' + error);
+    } finally {
+      setUploading(false);
+      setImageFiles(null);
+      setImagePreview([]);
     }
-    setUploading(false);
-    setImageFiles(null);
-    setImagePreview([]);
-    alert('Upload complete!');
   };
 
   return (
@@ -187,7 +334,7 @@ export default function AdminPanel() {
       <Tab.Group>
         <Tab.List className="flex space-x-2 rounded-xl bg-green-100 p-1 mb-6">
           <Tab className={({ selected }: { selected: boolean }) => classNames('w-full py-2.5 text-sm font-medium leading-5 rounded-lg', selected ? 'bg-green-500 text-white' : 'text-green-900 hover:bg-green-200')}>Products</Tab>
-          <Tab className={({ selected }: { selected: boolean }) => classNames('w-full py-2.5 text-sm font-medium leading-5 rounded-lg', selected ? 'bg-green-500 text-white' : 'text-green-900 hover:bg-green-200')}>Sections</Tab>
+          <Tab className={({ selected }: { selected: boolean }) => classNames('w-full py-2.5 text-sm font-medium leading-5 rounded-lg', selected ? 'bg-green-500 text-white' : 'text-green-900 hover:bg-green-200')}>SEO Metadata</Tab>
         </Tab.List>
         <Tab.Panels>
           {/* Products Tab */}
@@ -241,28 +388,114 @@ export default function AdminPanel() {
               })}
             </ul>
           </Tab.Panel>
-          {/* Sections Tab */}
+          {/* SEO Metadata Tab */}
           <Tab.Panel>
-            <div className="mb-4">Edit section titles and iframe links:</div>
-            {Object.entries(sections).map(([key, sec]) => (
-              <div key={key} className="mb-4 p-3 border rounded">
-                <input value={sec.title} onChange={e => setSections(s => ({ ...s, [key]: { ...s[key], title: e.target.value } }))} className="w-full border p-2 rounded mb-2" placeholder="Section Title" />
-                <input value={sec.iframe} onChange={e => setSections(s => ({ ...s, [key]: { ...s[key], iframe: e.target.value } }))} className="w-full border p-2 rounded mb-2" placeholder="Iframe Link (YouTube embed)" />
-                {sec.iframe && (
-                  <div className="w-full flex justify-center my-2">
-                    <iframe
-                      src={sec.iframe}
-                      title={sec.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-lg border-2 border-green-200 bg-black"
-                      style={{ minHeight: '180px', border: 'none' }}
-                    />
+            <div className="mb-4 flex gap-2">
+              {productTables.map(({ key, label }) => (
+                <button key={key} onClick={() => setSelectedTable(key)} className={classNames('px-3 py-1 rounded', selectedTable === key ? 'bg-green-600 text-white' : 'bg-green-100 text-green-900')}>{label}</button>
+              ))}
+            </div>
+            
+            {editingSeo && (
+              <form onSubmit={handleSeoSubmit} className="mb-6 p-4 border rounded bg-gray-50">
+                <h3 className="text-lg font-bold mb-3">Editing SEO for: {editingSeo.product.maintext || editingSeo.product.title || 'Untitled'}</h3>
+                <div className="space-y-2">
+                  <input name="title" value={seoForm.title} onChange={handleSeoChange} placeholder="Page Title" className="w-full border p-2 rounded" />
+                  <textarea name="metadata" value={seoForm.metadata} onChange={handleSeoChange} placeholder="Meta Description" className="w-full border p-2 rounded" rows={3} />
+                  <input name="metakeywords" value={seoForm.metakeywords} onChange={handleSeoChange} placeholder="Meta Keywords (comma-separated)" className="w-full border p-2 rounded" />
+                  <input name="heading" value={seoForm.heading} onChange={handleSeoChange} placeholder="Main Heading" className="w-full border p-2 rounded" />
+                  <div className="flex gap-2">
+                    <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">Update SEO</button>
+                    <button type="button" onClick={handleSeoCancel} className="bg-red-600 text-white px-4 py-2 rounded">Cancel</button>
                   </div>
-                )}
-              </div>
-            ))}
-            <button className="bg-green-600 text-white px-4 py-2 rounded">Save Sections (not implemented)</button>
+                </div>
+              </form>
+            )}
+
+            {selectedTable === 'title' && editingTitle && (
+              <form onSubmit={handleTitleSubmit} className="mb-6 p-4 border rounded bg-blue-50">
+                <h3 className="text-lg font-bold mb-3">Editing Title Entry: {editingTitle.title || 'Untitled'}</h3>
+                <div className="space-y-2">
+                  <input name="title" value={titleForm.title} onChange={handleTitleChange} placeholder="Page Title" className="w-full border p-2 rounded" />
+                  <textarea name="metadata" value={titleForm.metadata} onChange={handleTitleChange} placeholder="Meta Description" className="w-full border p-2 rounded" rows={3} />
+                  <input name="metakeywords" value={titleForm.metakeywords} onChange={handleTitleChange} placeholder="Meta Keywords (comma-separated)" className="w-full border p-2 rounded" />
+                  <input name="heading" value={titleForm.heading} onChange={handleTitleChange} placeholder="Main Heading" className="w-full border p-2 rounded" />
+                  <div className="flex gap-2">
+                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Update Title</button>
+                    <button type="button" onClick={handleTitleCancel} className="bg-red-600 text-white px-4 py-2 rounded">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            )}
+
+            {selectedTable === 'title' && !editingTitle && (
+              <form onSubmit={handleTitleSubmit} className="mb-6 p-4 border rounded bg-blue-50">
+                <h3 className="text-lg font-bold mb-3">Add New Title Entry</h3>
+                <div className="space-y-2">
+                  <input name="title" value={titleForm.title} onChange={handleTitleChange} placeholder="Page Title" className="w-full border p-2 rounded" />
+                  <textarea name="metadata" value={titleForm.metadata} onChange={handleTitleChange} placeholder="Meta Description" className="w-full border p-2 rounded" rows={3} />
+                  <input name="metakeywords" value={titleForm.metakeywords} onChange={handleTitleChange} placeholder="Meta Keywords (comma-separated)" className="w-full border p-2 rounded" />
+                  <input name="heading" value={titleForm.heading} onChange={handleTitleChange} placeholder="Main Heading" className="w-full border p-2 rounded" />
+                  <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Add Title</button>
+                </div>
+              </form>
+            )}
+            
+            <div className="space-y-4">
+              {(selectedTable === 'title' ? titleTableData : (products[selectedTable] || [])).map((item: any) => (
+                <div key={item.id} className="border rounded p-4">
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg">{item.maintext || item.title || 'Untitled'}</h4>
+                      {item.sectext && <p className="text-sm text-gray-600">{item.sectext}</p>}
+                      {item.price && <p className="text-green-700 font-bold">₹{item.price}</p>}
+                      {selectedTable === 'title' && <p className="text-sm text-gray-600">ID: {item.id}</p>}
+                    </div>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={() => selectedTable === 'title' ? handleTitleEdit(item) : handleSeoEdit(selectedTable, item)} 
+                        className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit SEO
+                      </button>
+                      {selectedTable === 'title' && (
+                        <button 
+                          onClick={() => handleTitleDelete(item.id)} 
+                          className="bg-red-600 text-white px-3 py-1 rounded text-sm"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <strong>Title:</strong> 
+                      <p className="text-gray-700 mt-1">{item.title || 'Not set'}</p>
+                    </div>
+                    <div>
+                      <strong>Meta Description:</strong> 
+                      <p className="text-gray-700 mt-1">{item.metadata || 'Not set'}</p>
+                    </div>
+                    <div>
+                      <strong>Meta Keywords:</strong> 
+                      <p className="text-gray-700 mt-1">{item.metakeywords || 'Not set'}</p>
+                    </div>
+                    <div>
+                      <strong>Main Heading:</strong> 
+                      <p className="text-gray-700 mt-1">{item.heading || 'Not set'}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              
+              {selectedTable === 'title' && titleTableData.length === 0 && (
+                <div className="text-center py-8 text-gray-500">
+                  No title entries found. Add your first entry using the form above.
+                </div>
+              )}
+            </div>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
