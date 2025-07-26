@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Pages -->
   <url>
-    <loc>https://rawhalal.com/</loc>
+    <loc>https://www.rawhalalchicken.com/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,14 +10,14 @@
   
   <!-- Web Version Pages -->
   <url>
-    <loc>https://rawhalal.com/web</loc>
+    <loc>https://www.rawhalalchicken.com/web</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/web/contact</loc>
+    <loc>https://www.rawhalalchicken.com/web/contact</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -25,28 +25,28 @@
   
   <!-- Web Product Categories -->
   <url>
-    <loc>https://rawhalal.com/web/chicken</loc>
+    <loc>https://www.rawhalalchicken.com/web/chicken</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/web/fish</loc>
+    <loc>https://www.rawhalalchicken.com/web/fish</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/web/mutton</loc>
+    <loc>https://www.rawhalalchicken.com/web/mutton</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/web/bhiryani</loc>
+    <loc>https://www.rawhalalchicken.com/web/bhiryani</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -54,7 +54,7 @@
   
   <!-- Mobile Version Pages -->
   <url>
-    <loc>https://rawhalal.com/mobile</loc>
+    <loc>https://www.rawhalalchicken.com/mobile</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -62,28 +62,28 @@
   
   <!-- Mobile Product Categories -->
   <url>
-    <loc>https://rawhalal.com/mobile/chicken</loc>
+    <loc>https://www.rawhalalchicken.com/mobile/chicken</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/mobile/fish</loc>
+    <loc>https://www.rawhalalchicken.com/mobile/fish</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/mobile/mutton</loc>
+    <loc>https://www.rawhalalchicken.com/mobile/mutton</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/mobile/bhiryani</loc>
+    <loc>https://www.rawhalalchicken.com/mobile/bhiryani</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -91,21 +91,21 @@
   
   <!-- Legal Pages -->
   <url>
-    <loc>https://rawhalal.com/aboutus</loc>
+    <loc>https://www.rawhalalchicken.com/aboutus</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/privacypolicy</loc>
+    <loc>https://www.rawhalalchicken.com/privacypolicy</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://rawhalal.com/terms&amp;conditions</loc>
+    <loc>https://www.rawhalalchicken.com/terms&amp;conditions</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -113,7 +113,7 @@
   
   <!-- Admin Pages -->
   <url>
-    <loc>https://rawhalal.com/admin</loc>
+    <loc>https://www.rawhalalchicken.com/admin</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

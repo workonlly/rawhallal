@@ -68,11 +68,11 @@ Allow: /sitemap.xml
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://rawhalal.com/sitemap.xml
+Sitemap: https://www.rawhalalchicken.com/sitemap.xml
 
 # Additional sitemaps (if you have multiple)
-# Sitemap: https://rawhalal.com/sitemap-products.xml
-# Sitemap: https://rawhalal.com/sitemap-categories.xml
+# Sitemap: https://www.rawhalalchicken.com/sitemap-products.xml
+# Sitemap: https://www.rawhalalchicken.com/sitemap-categories.xml
 
 # Specific rules for major search engines
 User-agent: Googlebot
