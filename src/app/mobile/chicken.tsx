@@ -23,6 +23,28 @@ export default function Chicken() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  // Function to create a URL-safe slug from items.maintext with reversible icons
+  function toSlug(text: string) {
+    return text
+      .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
+      .replace(/[\/\\]/g, '_SLASH_') // Replace slashes with _SLASH_
+      .replace(/[()]/g, '_PAREN_') // Replace parentheses with _PAREN_
+      .replace(/[&]/g, '_AND_') // Replace & with _AND_
+      .replace(/[#]/g, '_HASH_') // Replace # with _HASH_
+      .replace(/[@]/g, '_AT_') // Replace @ with _AT_
+      .replace(/[%]/g, '_PERCENT_') // Replace % with _PERCENT_
+      .replace(/[+]/g, '_PLUS_') // Replace + with _PLUS_
+      .replace(/[=]/g, '_EQUALS_') // Replace = with _EQUALS_
+      .replace(/[?]/g, '_QUESTION_') // Replace ? with _QUESTION_
+      .replace(/[!]/g, '_EXCLAMATION_') // Replace ! with _EXCLAMATION_
+      .replace(/[$]/g, '_DOLLAR_') // Replace $ with _DOLLAR_
+      .replace(/[*]/g, '_STAR_') // Replace * with _STAR_
+      .replace(/[,]/g, '_COMMA_') // Replace , with _COMMA_
+      .replace(/[.]/g, '_DOT_') // Replace . with _DOT_
+      .replace(/[:]/g, '_COLON_') // Replace : with _COLON_
+      .replace(/[;]/g, '_SEMICOLON_'); // Replace ; with _SEMICOLON_
+  }
+
   // Fetch chicken products and images
   useEffect(() => {
     const fetchProducts = async () => {
@@ -69,7 +91,8 @@ export default function Chicken() {
                   price: items.price,
                   image: urls,
                 }));
-                router.push('/open');
+                const slug = toSlug(items.maintext);
+                router.push(`/open/${slug}`); // Use custom slug
               }}
             >
               <div className="w-full flex justify-center items-center mb-2">
