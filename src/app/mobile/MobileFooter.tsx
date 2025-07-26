@@ -54,7 +54,7 @@ function MobileFooter() {
                 className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800"
                 onClick={() => setActivePage && setActivePage('contact')}
               >
-                🤝Franchise
+                🤝Contact us
               </button>
               <button
                 className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800"
@@ -78,7 +78,7 @@ function MobileFooter() {
                 🐐Mutton
               </Link>
               <Link href="/mobile/contact" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
-                🤝Franchise
+                🤝Contact us
               </Link>
               <Link href="/mobile/bhiryani" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🍚Bhiryani
@@ -98,6 +98,45 @@ function MobileFooter() {
           <Link href="/terms&conditions" className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow hover:bg-gray-800">
             TERMS
           </Link>
+        </div>
+
+        {/* Contact Section */}
+        <div className="w-full bg-white/10 p-4 backdrop-blur-md rounded-lg flex flex-row justify-center items-center mb-6">
+          <div className="flex flex-row items-center gap-4">
+            <div className="flex flex-col gap-2 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">📞</span>
+                <a href="tel:+919911296615" className="hover:text-green-400 text-white transition">+91 99112 96615</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">📧</span>
+                <a href="mailto:info@rawhalalchicken.com" className="hover:text-green-400 text-white transition">info@rawhalalchicken.com</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">📍</span>
+                <span className="text-white">Delhi NCR, India</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">🕒</span>
+                <span className="text-white">Mon-Sat: 9:00 AM - 8:00 PM</span>
+              </div>
+            </div>
+            
+            {/* WhatsApp Button */}
+            <a
+              href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20am%20interested%20in%20franchise%20opportunity"
+              className="inline-flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded-lg hover:bg-green-700 transition duration-300 text-xs"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/WhatsApp.svg.webp"
+                alt="WhatsApp"
+                className="w-4 h-4"
+              />
+              Chat on WhatsApp
+            </a>
+          </div>
         </div>
 
         {/* Social Media Section */}
