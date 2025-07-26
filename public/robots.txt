@@ -1,8 +1,4 @@
-import { NextResponse } from 'next/server';
-
-export async function GET() {
-  // Complete robots.txt content
-  const robotsContent = `# Robots.txt for RawHalal.com
+# Robots.txt for RawHalal.com
 # This file tells search engines which parts of the website they can crawl
 
 User-agent: *
@@ -148,13 +144,4 @@ Disallow: /generate-product-urls.js
 Disallow: /slug-generator.js
 Disallow: /COMPLETE_SITEMAP_TEMPLATE.xml
 Disallow: /PRODUCT_MAPPING.md
-Disallow: /SITE_STRUCTURE.md`;
-
-  return new NextResponse(robotsContent, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/plain',
-      'Cache-Control': 'public, max-age=3600',
-    },
-  });
-} 
+Disallow: /SITE_STRUCTURE.md 

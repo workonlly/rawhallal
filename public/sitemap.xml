@@ -122,7 +122,7 @@
   <!-- Dynamic Product Pages (Open/[slug]) -->
   <!-- Note: These are dynamically generated based on product slugs -->
   
-  <!-- Chicken Products - ADD YOUR ACTUAL PRODUCTS HERE -->
+  <!-- Chicken Products -->
   <url>
     <loc>https://rawhalal.com/open/Fresh_SPACE_Chicken_SPACE_Curry</loc>
     <lastmod>2024-01-01</lastmod>
@@ -193,7 +193,7 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- Fish Products - ADD YOUR ACTUAL PRODUCTS HERE -->
+  <!-- Fish Products -->
   <url>
     <loc>https://rawhalal.com/open/Fresh_SPACE_Fish_SPACE_Curry</loc>
     <lastmod>2024-01-01</lastmod>
@@ -250,7 +250,7 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- Mutton Products - ADD YOUR ACTUAL PRODUCTS HERE -->
+  <!-- Mutton Products -->
   <url>
     <loc>https://rawhalal.com/open/Fresh_SPACE_Mutton_SPACE_Curry</loc>
     <lastmod>2024-01-01</lastmod>
@@ -307,7 +307,7 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- Biryani Products - ADD YOUR ACTUAL PRODUCTS HERE -->
+  <!-- Biryani Products -->
   <url>
     <loc>https://rawhalal.com/open/Chicken_SPACE_Biryani_SPACE_Special</loc>
     <lastmod>2024-01-01</lastmod>
@@ -363,10 +363,5 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Add more products as needed -->
-  <!-- Copy and paste the URL structure above for each of your actual products -->
-  <!-- Replace the product names with your real product names -->
-  <!-- Use the toSlug() function to generate proper slugs -->
   
 </urlset> 
