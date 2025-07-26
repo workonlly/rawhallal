@@ -110,7 +110,7 @@ function MobileFooter() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-green-400">📧</span>
-                <a href="mailto:info@rawhalalchicken.com" className="hover:text-green-400 text-white transition">info@rawhalalchicken.com</a>
+                <a href="mailto:rawhalalchicken@gmail.com" className="hover:text-green-400 text-white transition">rawhalalchicken@gmail.com</a>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-green-400">📍</span>
@@ -119,6 +119,9 @@ function MobileFooter() {
               <div className="flex items-center gap-2">
                 <span className="text-green-400">🕒</span>
                 <span className="text-white">Mon-Sat: 9:00 AM - 8:00 PM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-white">fssai license Number:12723055001472</span>
               </div>
             </div>
             
@@ -188,7 +191,7 @@ function MobileFooter() {
         {/* Copyright */}
         <div className="text-center mt-6 pt-4 border-t border-gray-700">
           <p className="text-gray-400 text-xs">
-            © 2024 Raw Halal Chicken. All rights reserved.
+            © LaCleo Corporate Services. All rights reserved.
           </p>
         </div>
       </div>

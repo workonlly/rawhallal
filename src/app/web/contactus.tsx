@@ -99,7 +99,7 @@ function Contactus() {
                       </div>
                       <div className="flex items-center justify-center gap-2">
                         <span className="text-green-400">📧</span>
-                        <a href="mailto:info@rawhalalchicken.com" className="hover:text-green-400 transition">info@rawhalalchicken.com</a>
+                        <a href="mailto:rawhalalchicken@gmail.com" className="hover:text-green-400 transition">rawhalalchicken@gmail.com</a>
                       </div>
                       <div className="flex items-center justify-center gap-2">
                         <span className="text-green-400">📍</span>
@@ -109,6 +109,9 @@ function Contactus() {
                         <span className="text-green-400">🕒</span>
                         <span>Mon-Sat: 9:00 AM - 8:00 PM</span>
                       </div>
+                      <div className="flex items-center gap-2">
+                <span className="text-white">fssai license Number:12723055001472</span>
+              </div>
                     </div>
                     
                     {/* WhatsApp Button */}
