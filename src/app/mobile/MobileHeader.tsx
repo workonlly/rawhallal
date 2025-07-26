@@ -24,7 +24,7 @@ export default function MobileHeader({ pageHeading }: MobileHeaderProps) {
             {open && (
               <div className="absolute top-14 left-2 bg-black text-white p-4 rounded-lg shadow-lg z-80 w-[200px]">
                 <ul className="flex flex-col gap-2 text-xl">
-                  <li><a href="/">🏠 Home</a></li>
+                  <li><a href="/mobile/">🏠 Home</a></li>
                   <li><a href="/mobile/chicken">🍗 Chicken</a></li>
                   <li><a href="/mobile/fish">🐟 Fish</a></li>
                   <li><a href="/mobile/mutton">🐐 Mutton</a></li>
