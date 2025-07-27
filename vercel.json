@@ -1,30 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/robots.txt",
-      "dest": "/public/robots.txt"
-    },
-    {
-      "src": "/sitemap.xml",
-      "dest": "/public/sitemap.xml"
-    }
-  ],
   "headers": [
-   
-  ],
-  "functions": {
-    "app/api/**/*.ts": {
-      "maxDuration": 30
+    {
+      "source": "/(.*).(jpg|jpeg|png|gif|webp|svg|ico)$",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  }
-} 
+  ],
+  "crons": [
+    {
+      "path": "/api/revalidate?tag=all",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
