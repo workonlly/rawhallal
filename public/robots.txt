@@ -33,6 +33,7 @@ Allow: /images/
 Allow: /assets/
 Allow: /favicon.ico
 Allow: /sitemap.xml
+Allow: /robots.txt
 
 # Allow all dynamic product pages
 Allow: /open/
@@ -72,6 +73,26 @@ Allow: *.cache
 # Allow image optimization paths
 Allow: /_next/image
 Allow: /_next/static
+
+# Allow all dynamic routes
+Allow: /open/*
+Allow: /web/*
+Allow: /mobile/*
+Allow: /api/*
+
+# Allow all static files
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.ico
+Allow: /*.css
+Allow: /*.js
+Allow: /*.json
+Allow: /*.xml
+Allow: /*.txt
 
 # Crawl delay (optional - tells bots to wait between requests)
 Crawl-delay: 1
@@ -132,3 +153,49 @@ Allow: /
 # Allow all other bots from all areas
 User-agent: *
 Allow: /
+
+# Additional comprehensive rules for maximum visibility
+User-agent: *
+Allow: /web/contact
+Allow: /web/chicken
+Allow: /web/fish
+Allow: /web/mutton
+Allow: /web/bhiryani
+Allow: /mobile/chicken
+Allow: /mobile/fish
+Allow: /mobile/mutton
+Allow: /mobile/bhiryani
+Allow: /open/Fresh_SPACE_Chicken_SPACE_Curry
+Allow: /open/Chicken_SPACE_Biryani
+Allow: /open/Chicken_SPACE_Kebab
+Allow: /open/Chicken_SPACE_Tikka
+Allow: /open/Chicken_SPACE_Masala
+Allow: /open/Chicken_SPACE_Korma
+Allow: /open/Chicken_SPACE_Butter_SPACE_Masala
+Allow: /open/Chicken_SPACE_Tandoori
+Allow: /open/Chicken_SPACE_65
+Allow: /open/Chicken_SPACE_Popcorn
+Allow: /open/Fresh_SPACE_Fish_SPACE_Curry
+Allow: /open/Fish_SPACE_Biryani
+Allow: /open/Fish_SPACE_Fry
+Allow: /open/Fish_SPACE_Masala
+Allow: /open/Fish_SPACE_Pakora
+Allow: /open/Fish_SPACE_Kebab
+Allow: /open/Fish_SPACE_Tikka
+Allow: /open/Fish_SPACE_Curry_SPACE_Special
+Allow: /open/Fresh_SPACE_Mutton_SPACE_Curry
+Allow: /open/Mutton_SPACE_Biryani
+Allow: /open/Mutton_SPACE_Kebab
+Allow: /open/Mutton_SPACE_Masala
+Allow: /open/Mutton_SPACE_Korma
+Allow: /open/Mutton_SPACE_Rogan_SPACE_Josh
+Allow: /open/Mutton_SPACE_Keema
+Allow: /open/Mutton_SPACE_Curry_SPACE_Special
+Allow: /open/Chicken_SPACE_Biryani_SPACE_Special
+Allow: /open/Fish_SPACE_Biryani_SPACE_Special
+Allow: /open/Mutton_SPACE_Biryani_SPACE_Special
+Allow: /open/Veg_SPACE_Biryani
+Allow: /open/Hyderabadi_SPACE_Biryani
+Allow: /open/Lucknowi_SPACE_Biryani
+Allow: /open/Dum_SPACE_Biryani
+Allow: /open/Thalassery_SPACE_Biryani
