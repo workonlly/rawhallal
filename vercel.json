@@ -9,11 +9,5 @@
         }
       ]
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/revalidate?tag=all",
-      "schedule": "0 0 * * *"
-    }
   ]
 }
