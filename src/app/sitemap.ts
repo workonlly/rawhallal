@@ -1,84 +1,67 @@
 import { MetadataRoute } from 'next';
+import supabase from '../../supabase.js';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Function to create a URL-safe slug from product.maintext (same as web folder)
+function toSlug(text: string) {
+  return text
+    .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
+    .replace(/[\/\\]/g, '_SLASH_') // Replace slashes with _SLASH_
+    .replace(/[()]/g, '_PAREN_') // Replace parentheses with _PAREN_
+    .replace(/[&]/g, '_AND_') // Replace & with _AND_
+    .replace(/[#]/g, '_HASH_') // Replace # with _HASH_
+    .replace(/[@]/g, '_AT_') // Replace @ with _AT_
+    .replace(/[%]/g, '_PERCENT_') // Replace % with _PERCENT_
+    .replace(/[+]/g, '_PLUS_') // Replace + with _PLUS_
+    .replace(/[=]/g, '_EQUALS_') // Replace = with _EQUALS_
+    .replace(/[?]/g, '_QUESTION_') // Replace ? with _QUESTION_
+    .replace(/[!]/g, '_EXCLAMATION_') // Replace ! with _EXCLAMATION_
+    .replace(/[$]/g, '_DOLLAR_') // Replace $ with _DOLLAR_
+    .replace(/[*]/g, '_STAR_') // Replace * with _STAR_
+    .replace(/[,]/g, '_COMMA_') // Replace , with _COMMA_
+    .replace(/[.]/g, '_DOT_') // Replace . with _DOT_
+    .replace(/[:]/g, '_COLON_') // Replace : with _COLON_
+    .replace(/[;]/g, '_SEMICOLON_'); // Replace ; with _SEMICOLON_
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.rawhalalchicken.com';
 
-  // Product slugs for dynamic pages
-  const chickenProducts = [
-    'Fresh_SPACE_Chicken_SPACE_Curry',
-    'Chicken_SPACE_Biryani',
-    'Chicken_SPACE_Kebab',
-    'Chicken_SPACE_Tikka',
-    'Chicken_SPACE_Masala',
-    'Chicken_SPACE_Korma',
-    'Chicken_SPACE_Butter_SPACE_Masala',
-    'Chicken_SPACE_Tandoori',
-    'Chicken_SPACE_65',
-    'Chicken_SPACE_Popcorn'
-  ];
+  // Fetch all products from all tables
+  let productUrls: MetadataRoute.Sitemap = [];
+  
+  try {
+    // Define all product tables
+    const tables = ['fresh1', 'chicken', 'fish', 'mutton'];
+    
+    // Fetch products from each table
+    for (const table of tables) {
+      const { data: products, error } = await supabase
+        .from(table)
+        .select('*');
 
-  const fishProducts = [
-    'Fresh_SPACE_Fish_SPACE_Curry',
-    'Fish_SPACE_Biryani',
-    'Fish_SPACE_Fry',
-    'Fish_SPACE_Masala',
-    'Fish_SPACE_Pakora',
-    'Fish_SPACE_Kebab',
-    'Fish_SPACE_Tikka',
-    'Fish_SPACE_Curry_SPACE_Special'
-  ];
+      if (error) {
+        console.error(`Error fetching products from ${table}:`, error);
+        continue;
+      }
 
-  const muttonProducts = [
-    'Fresh_SPACE_Mutton_SPACE_Curry',
-    'Mutton_SPACE_Biryani',
-    'Mutton_SPACE_Kebab',
-    'Mutton_SPACE_Masala',
-    'Mutton_SPACE_Korma',
-    'Mutton_SPACE_Rogan_SPACE_Josh',
-    'Mutton_SPACE_Keema',
-    'Mutton_SPACE_Curry_SPACE_Special'
-  ];
+      if (products && products.length > 0) {
+        // Generate product URLs from database using maintext field
+        const tableProductUrls = products.map((product: any) => ({
+          url: `${baseUrl}/open/${toSlug(product.maintext)}`,
+          lastModified: new Date(product.updated_at || product.created_at || Date.now()),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+        }));
+        
+        productUrls = [...productUrls, ...tableProductUrls];
+      }
+    }
+  } catch (error) {
+    console.error('Error in sitemap generation:', error);
+  }
 
-  const biryaniProducts = [
-    'Chicken_SPACE_Biryani_SPACE_Special',
-    'Fish_SPACE_Biryani_SPACE_Special',
-    'Mutton_SPACE_Biryani_SPACE_Special',
-    'Veg_SPACE_Biryani',
-    'Hyderabadi_SPACE_Biryani',
-    'Lucknowi_SPACE_Biryani',
-    'Dum_SPACE_Biryani',
-    'Thalassery_SPACE_Biryani'
-  ];
-
-  // Generate product URLs
-  const productUrls = [
-    ...chickenProducts.map(slug => ({
-      url: `${baseUrl}/open/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    })),
-    ...fishProducts.map(slug => ({
-      url: `${baseUrl}/open/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    })),
-    ...muttonProducts.map(slug => ({
-      url: `${baseUrl}/open/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    })),
-    ...biryaniProducts.map(slug => ({
-      url: `${baseUrl}/open/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }))
-  ];
-
-  return [
+  // Static URLs
+  const staticUrls: MetadataRoute.Sitemap = [
     // Main Pages
     {
       url: baseUrl,
@@ -230,8 +213,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.1,
     },
-
-    // Add all product URLs
-    ...productUrls,
   ];
+
+  // Combine static URLs with dynamic product URLs
+  return [...staticUrls, ...productUrls];
 }
