@@ -9,11 +9,11 @@
   "routes": [
     {
       "src": "/robots.txt",
-      "dest": "/public/robots"
+      "dest": "/robots"
     },
     {
       "src": "/sitemap.xml",
-      "dest": "/public/sitemap"
+      "dest": "/sitemap"
     }
   ],
   "headers": [
@@ -61,15 +61,7 @@
         }
       ]
     },
-    {
-      "source": "/public/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
+   
     {
       "source": "/assets/(.*)",
       "headers": [
