@@ -95,7 +95,7 @@ function MobileFooter() {
           <Link href="/privacypolicy" className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow hover:bg-gray-800">
             PRIVACY
           </Link>
-          <Link href="/terms&conditions" className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow hover:bg-gray-800">
+          <Link href="/termsandconditions" className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow hover:bg-gray-800">
             TERMS
           </Link>
         </div>

@@ -3,7 +3,132 @@
 
 User-agent: *
 Allow: /
-Disallow:/admin
-Disallow:/data
 
+# Main pages - Allow crawling
+Allow: /web/
+Allow: /mobile/
+Allow: /open/
+Allow: /aboutus
+Allow: /privacypolicy
+Allow: /termsandconditions
+
+# Product pages - Allow crawling
+Allow: /web/chicken
+Allow: /web/fish
+Allow: /web/mutton
+Allow: /web/bhiryani
+Allow: /mobile/chicken
+Allow: /mobile/fish
+Allow: /mobile/mutton
+Allow: /mobile/bhiryani
+
+# Mapped URLs from vercel.json - Allow crawling
+Allow: /contactus
+Allow: /about
+Allow: /contact
+
+# Allow important static assets
+Allow: /public/
+Allow: /images/
+Allow: /assets/
+Allow: /favicon.ico
+Allow: /sitemap.xml
+
+# Allow all dynamic product pages
+Allow: /open/
+
+# Allow admin pages (if you want them indexed)
+Allow: /admin/
+
+# Allow API pages (if you want them indexed)
+Allow: /api/
+
+# Allow all Next.js generated content
+Allow: /_next/
+Allow: /.next/
+
+# Allow all configuration files (if needed)
+Allow: /package.json
+Allow: /tsconfig.json
+Allow: /next.config.ts
+
+# Allow all environment files (if needed)
+Allow: /.env
+Allow: /.env.local
+Allow: /.env.production
+
+# Allow all documentation
+Allow: /README.md
+Allow: /docs/
+
+# Allow all temporary and cache files
+Allow: /temp/
+Allow: /cache/
+Allow: /tmp/
+Allow: *.log
+Allow: *.tmp
+Allow: *.cache
+
+# Allow image optimization paths
+Allow: /_next/image
+Allow: /_next/static
+
+# Crawl delay (optional - tells bots to wait between requests)
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://www.rawhalalchicken.com/sitemap.xml
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Allow all bots and scrapers
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: BLEXBot
+Allow: /
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+
+# Allow social media bots to crawl everything
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Allow archive.org
+User-agent: ia_archiver
+Allow: /
+
+# Allow all other bots from all areas
+User-agent: *
+Allow: /

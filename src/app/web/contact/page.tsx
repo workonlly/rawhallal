@@ -106,7 +106,7 @@ export default async function PageContent() {
                 <a href="/web/bhiryani" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl"   >🤝  Bhiryani</div></a>
                 <a href="/aboutus" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">ABOUT US</div></a>
                 <a href="/privacypolicy" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">PRIVACY POLICY</div></a>
-                <a href="/terms&conditions" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">TERMS & CONDITIONS</div></a>
+                <a href="/termsandconditions" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">TERMS & CONDITIONS</div></a>
               </div>
             </div>
           </div> 

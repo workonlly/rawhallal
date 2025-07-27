@@ -104,7 +104,7 @@ function Footer() {
           <Link href="/privacypolicy" className="bg-black text-white px-4 py-2 rounded-xl font-semibold transition shadow hover:bg-gray-800">
             PRIVACY POLICY
           </Link>
-          <Link href="/terms&conditions" className="bg-black text-white px-4 py-2 rounded-xl font-semibold transition shadow hover:bg-gray-800">
+          <Link href="/termsandconditions" className="bg-black text-white px-4 py-2 rounded-xl font-semibold transition shadow hover:bg-gray-800">
             TERMS & CONDITIONS
           </Link>
         </div>
