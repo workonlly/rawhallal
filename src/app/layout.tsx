@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Create Next App",
-  description: "order online raw chicken & Mutton home delivery in noida, fish home delivery, Chicken and fish home delivery in Noida, Raw desi chicken home delivery, rohu fish",
+
   other: {
     "facebook-domain-verification": "ohquze0krklooq0r5eufurw4oky3b8",
     "p:domain_verify": "7402d4a3b47fbed3cfbdb0b8674cc9d3",
     "yandex-verification": "b1aec977ba6a26bf",
+    "msvalidate.01":"9ADFE7C80958C9A5FC9EB422DAF1E1A7",
   },
 };
 
