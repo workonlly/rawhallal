@@ -140,9 +140,31 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- API Routes -->
+  <url>
+    <loc>https://www.rawhalalchicken.com/api</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <!-- Static Assets -->
+  <url>
+    <loc>https://www.rawhalalchicken.com/sitemap.xml</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rawhalalchicken.com/robots.txt</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
   
   <!-- Dynamic Product Pages (Open/[slug]) -->
-  <!-- Note: These are dynamically generated based on product slugs -->
   
   <!-- Chicken Products -->
   <url>
