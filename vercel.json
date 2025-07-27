@@ -9,5 +9,24 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/contactus",
+      "destination": "/web/contact",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    {
+      "source": "/about",
+      "destination": "/aboutus"
+    },
+    {
+      "source": "/contact",
+      "destination": "/web/contact"
+    }
   ]
 }
