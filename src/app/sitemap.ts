@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_KEY || 'https://www.rawhalalchicken.com';
 
   // TODO: Add dynamic routes for /open/[slug] by fetching data
   // const products = await fetch('...').then((res) => res.json());
