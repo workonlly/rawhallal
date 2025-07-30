@@ -77,9 +77,6 @@ function MobileFooter() {
               <Link href="/rawfreshchickenandmutton/mutton" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🐐Mutton
               </Link>
-              <Link href="/rawfreshchickenandmutton/contact" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
-                🤝Contact us
-              </Link>
               <Link href="/rawfreshchickenandmutton/bhiryani" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🍚Bhiryani
               </Link>
