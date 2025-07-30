@@ -27,13 +27,13 @@ export async function generateMetadata() {
     publisher: 'Raw Halal Chicken',
     
     alternates: {
-      canonical: `https://www.rawhalalchicken.com/mobile`,
+      canonical: `https://www.rawhalalchicken.com/rawfreshchickenandmutton`,
     },
 
     openGraph: {
       title: `${product.name} | Raw Halal Chicken`,
       description: product.description,
-      url: `https://www.rawhalalchicken.com/mobile`,
+      url: `https://www.rawhalalchicken.com/rawfreshchickenandmutton`,
       siteName: 'Raw Halal Chicken',
       images: [
         {

@@ -77,6 +77,8 @@ export async function generateMetadata() {
 }
 
 import Home from "./pag";
+import MobileRedirect from "./MobileRedirect";
+
 export default async function PageContent() {
   // Get the specific row by ID only
   const { data, error } = await supabase
@@ -88,7 +90,9 @@ export default async function PageContent() {
   const pageHeading = data?.heading || 'Fresh and halal chicken products';
 
   return (
-    <div className='relative h-screen w-screen'>
+    <>
+      <MobileRedirect />
+      <div className='relative h-screen w-screen'>
       <div className='animated-bg h-screen w-screen relative p-1'>
         {/* black background screen here */}
         <div className='bg-black  h-full w-full rounded-md relative flex flex-row  items-center p-1'>
@@ -136,5 +140,6 @@ export default async function PageContent() {
       </div>
      
     </div>
+    </>
   );
 } 

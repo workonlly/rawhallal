@@ -65,22 +65,22 @@ function MobileFooter() {
             </>
           ) : (
             <>
-              <Link href="/mobile" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🏠Home
               </Link>
-              <Link href="/mobile/chicken" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton/chicken" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🍗Chicken
               </Link>
-              <Link href="/mobile/fish" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton/fish" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🐟Fish
               </Link>
-              <Link href="/mobile/mutton" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton/mutton" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🐐Mutton
               </Link>
-              <Link href="/mobile/contact" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton/contact" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🤝Contact us
               </Link>
-              <Link href="/mobile/bhiryani" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
+              <Link href="/rawfreshchickenandmutton/bhiryani" className="bg-black text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition shadow hover:bg-gray-800">
                 🍚Bhiryani
               </Link>
             </>

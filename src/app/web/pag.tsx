@@ -10,6 +10,7 @@ import { setSelectedProduct } from '../store/productSlice'; // Corrected path
 import { useRouter } from 'next/navigation';
 import { SelectedProduct } from '../store/types';
 import Footer from './footer';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 
 
@@ -39,11 +40,13 @@ export default function Home() {
     fresh().then(setFolderMap)
   }, []);
 
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth < 640) {
-        // Mobile: route to /mobile
-        router.replace('/rawfreshchcikenandmutton');
-      }
+  // Enhanced mobile detection for shared URLs
+  useEffect(() => {
+    if (isMobileDevice()) {
+      // Mobile: route to mobile version
+      router.replace('/rawfreshchickenandmutton');
+    }
+  }, [router]);
 
 
   // Function to create a URL-safe slug from product.maintext with reversible icons
@@ -178,5 +181,4 @@ export default function Home() {
       </main>
     </div>
   );
-}
 }
