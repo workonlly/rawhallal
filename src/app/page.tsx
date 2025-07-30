@@ -128,7 +128,7 @@ export default function Home() {
         {isRedirecting ? 'Redirecting...' : 'Loading...'}
       </div>
       <div className="text-gray-400 text-sm text-center max-w-md">
-        Detecting your device and redirecting to the best experience...
+        Site loading...
       </div>
     </div>
   );
