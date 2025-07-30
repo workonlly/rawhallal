@@ -14,6 +14,7 @@ import Footer from './footer';
 
 
 
+
 interface Product {
   id: number;
   maintext: string;
@@ -37,6 +38,13 @@ export default function Home() {
     fetchProducts();
     fresh().then(setFolderMap)
   }, []);
+
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) {
+        // Mobile: route to /mobile
+        router.replace('/rawfreshchcikenandmutton');
+      }
+
 
   // Function to create a URL-safe slug from product.maintext with reversible icons
   function toSlug(text: string) {
@@ -171,4 +179,4 @@ export default function Home() {
     </div>
   );
 }
-
+}

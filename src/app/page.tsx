@@ -10,7 +10,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       if (window.innerWidth < 640) {
         // Mobile: route to /mobile
-        router.replace('/mobile');
+        router.replace('/rawfreshchcikenandmutton');
       } else {
         // Desktop/tablet: route to /web/pag
         router.replace('/web');
