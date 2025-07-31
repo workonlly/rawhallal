@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setSelectedProduct } from '../store/productSlice';
 import { useRouter } from 'next/navigation';
 import Footer from './footer';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 interface Product {
   id: number;
@@ -46,6 +47,12 @@ function Mutton() {
   const [muttonImages, setMuttonImages] = useState<Record<string, string[]>>({});
   const dispatch = useDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      router.replace('/rawfreshchickenandmutton/mutton');
+    }
+  }, [router]);
 
  
   useEffect(() => {
