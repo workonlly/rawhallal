@@ -29,6 +29,7 @@ export default function MobileHeader({ pageHeading }: MobileHeaderProps) {
                   <li><a href="/rawfreshchickenandmutton/fish">🐟 Fish</a></li>
                   <li><a href="/rawfreshchickenandmutton/mutton">🐐 Mutton</a></li>
                   <li><a href="/rawfreshchickenandmutton/bhiryani">🤝 Biryani</a></li>
+                  <li><a href="/rawfreshchickenandmutton/contact">📞 Contact</a></li>
                 </ul>
               </div>
             )}
