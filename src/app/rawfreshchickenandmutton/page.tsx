@@ -6,13 +6,13 @@ export async function generateMetadata() {
   const { data, error } = await supabase
     .from('title')
     .select('*')
-    .eq('id', 109) 
-    .eq('table','mobile')
+    .eq('id', 111) 
+    .eq('table','home')
     .single();
 
   const product = {
     id: data?.id || 'title',
-    name: data?.title || 'Mobile Home',
+    name: data?.title || 'Raw Halal Chicken - Fresh & Halal Products',
     description: data?.metadata || 'Raw Halal Chicken mobile experience.',
     keywords: Array.isArray(data?.metakeywords) ? data.metakeywords : ['raw', 'halal', 'chicken', 'mobile'],
     authorName: 'Raw Halal Chicken',

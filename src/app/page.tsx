@@ -11,13 +11,13 @@ export default function Home() {
     const handleRedirect = () => {
       try {
         if (typeof window === 'undefined') {
-          // Server-side rendering - wait for client hydration
+          
           return;
         }
 
-        // More robust device detection
+      
         const isMobile = () => {
-          // Check multiple indicators for mobile devices
+          
           const userAgent = navigator.userAgent.toLowerCase();
           const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
           const isSmallScreen = window.innerWidth < 640;
