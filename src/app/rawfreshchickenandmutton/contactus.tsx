@@ -1,9 +1,12 @@
 'use client';
 import React from 'react';
+import MobileRedirect from './MobileRedirect';
 
 function ContactUs() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+    <>
+      <MobileRedirect />
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-black/50 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-gray-700">
         
         <div className="text-center mb-10">
@@ -94,6 +97,7 @@ function ContactUs() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

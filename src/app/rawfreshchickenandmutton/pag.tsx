@@ -10,6 +10,7 @@ import { setSelectedProduct } from '../store/productSlice';
 import { useRouter } from 'next/navigation';
 import { SelectedProduct } from '../store/types';
 import supabase from '../../../supabase';
+import MobileRedirect from './MobileRedirect';
 
 interface Product {
   id: number;
@@ -58,7 +59,9 @@ export default function MobilePag() {
   }
 
   return (
-    <main className="">
+    <>
+      <MobileRedirect />
+      <main className="">
       <div className="swiper mt-5">
         {/* Swiper for all images from all folders */}
         <Swiper
@@ -160,5 +163,6 @@ export default function MobilePag() {
         })}
       </div>
     </main>
+    </>
   );
 }

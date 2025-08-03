@@ -13,7 +13,7 @@ export async function generateMetadata() {
 
   const product = {
     id: data?.id || 'title',
-    name: data?.title || 'Chicken',
+    name: data?.title || 'Raw Halal Chicken - Fresh & Halal Products',
     description: data?.metadata || 'Fresh chicken and products from Raw Halal Chicken.',
     keywords: Array.isArray(data?.metakeywords) ? data.metakeywords : ['raw', 'chicken', 'fresh', 'halal'],
     authorName: 'Raw Halal Chicken',

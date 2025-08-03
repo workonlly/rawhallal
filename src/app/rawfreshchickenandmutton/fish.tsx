@@ -9,6 +9,7 @@ import { setSelectedProduct } from '../store/productSlice';
 import { useRouter } from 'next/navigation';
 import supabase from '../../../supabase';
 import { fish } from '../data/api';
+import MobileRedirect from './MobileRedirect';
 
 interface Product {
   id: number;
@@ -57,7 +58,9 @@ export default function Fish() {
   }, []);
 
   return (
-    <div className="w-full">
+    <>
+      <MobileRedirect />
+      <div className="w-full">
       {/* Video Section */}
       <div className="mb-8">
         <div className="text-2xl font-bold text-white mb-4 text-center">Watch Our Video</div>
@@ -143,5 +146,6 @@ export default function Fish() {
         })}
       </div>
     </div>
+    </>
   );
 } 

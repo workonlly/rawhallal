@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import MobileRedirect from './MobileRedirect';
 
 export default function Biryani() {
   const [timeLeft, setTimeLeft] = useState({
@@ -42,7 +43,9 @@ export default function Biryani() {
   }, []);
 
   return (
-    <div className="w-full">
+    <>
+      <MobileRedirect />
+      <div className="w-full">
       {/* Mobile Coming Soon Hero Section */}
       <div className="relative min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-orange-600 flex items-center justify-center overflow-hidden px-4">
         {/* Animated Background Elements */}
@@ -177,5 +180,6 @@ export default function Biryani() {
         </div>
       </div>
     </div>
+    </>
   );
 } 

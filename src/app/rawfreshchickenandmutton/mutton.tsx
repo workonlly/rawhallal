@@ -9,6 +9,7 @@ import { setSelectedProduct } from '../store/productSlice';
 import { useRouter } from 'next/navigation';
 import supabase from '../../../supabase';
 import { mutton } from '../data/api';
+import MobileRedirect from './MobileRedirect';
 
 interface Product {
   id: number;
@@ -57,7 +58,9 @@ export default function Mutton() {
   }, []);
 
   return (
-    <div className="w-full">
+    <>
+      <MobileRedirect />
+      <div className="w-full">
       {/* Products Grid */}
       <div className="grid grid-cols-1 gap-4">
         {muttonProducts.map((items) => {
@@ -128,5 +131,6 @@ export default function Mutton() {
         })}
       </div>
     </div>
+    </>
   );
 } 
