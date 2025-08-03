@@ -21,17 +21,21 @@ export default function MobileRedirect() {
         return window.innerWidth >= 768 && window.innerWidth < 1024;
       };
 
-      // Determine the appropriate route based on screen size
-      let targetRoute = '/rawfreshchickenandmutton'; // Default for mobile
+      // Get current path and determine target route
+      const currentPath = window.location.pathname;
+      let targetRoute = currentPath; // Default: stay on current path
 
-      if (isLargeScreen()) {
-        targetRoute = '/web'; // Redirect to web version for large screens
-      } else if (isTablet()) {
-        targetRoute = '/web'; // Redirect to web version for tablets
+      // If on mobile path and screen is large enough, redirect to web version
+      if (currentPath.startsWith('/rawfreshchickenandmutton')) {
+        if (isLargeScreen() || isTablet()) {
+          // Extract the subfolder from mobile path and redirect to web version
+          const subfolder = currentPath.replace('/rawfreshchickenandmutton', '');
+          targetRoute = `/web${subfolder}`;
+        }
       }
 
       // Only redirect if we're not already on the target route
-      if (window.location.pathname !== targetRoute) {
+      if (currentPath !== targetRoute) {
         // Add a small delay to ensure proper hydration
         const redirectTimer = setTimeout(() => {
           router.replace(targetRoute);
@@ -39,7 +43,7 @@ export default function MobileRedirect() {
 
         // Fallback redirect after 2 seconds if the first one fails
         const fallbackTimer = setTimeout(() => {
-          if (window.location.pathname === '/rawfreshchickenandmutton') {
+          if (window.location.pathname === currentPath) {
             router.replace(targetRoute);
           }
         }, 2000);
@@ -59,10 +63,15 @@ export default function MobileRedirect() {
         const isLargeScreen = window.innerWidth >= 1024;
         const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
         
-        if ((isLargeScreen || isTablet) && currentPath === '/rawfreshchickenandmutton') {
-          router.replace('/web');
-        } else if (window.innerWidth < 768 && currentPath === '/web') {
-          router.replace('/rawfreshchickenandmutton');
+        // Handle mobile to web redirects
+        if (currentPath.startsWith('/rawfreshchickenandmutton') && (isLargeScreen || isTablet)) {
+          const subfolder = currentPath.replace('/rawfreshchickenandmutton', '');
+          router.replace(`/web${subfolder}`);
+        }
+        // Handle web to mobile redirects
+        else if (currentPath.startsWith('/web') && window.innerWidth < 768) {
+          const subfolder = currentPath.replace('/web', '');
+          router.replace(`/rawfreshchickenandmutton${subfolder}`);
         }
       }
     };
