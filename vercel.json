@@ -15,6 +15,16 @@
       "source": "/contactus",
       "destination": "/web/contact",
       "permanent": true
+    },
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/:path*",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
