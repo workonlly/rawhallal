@@ -1,83 +1,158 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import supabase from "../../../../supabase";
-
-export async function generateMetadata() {
-  const { data, error } = await supabase
-    .from('title')
-    .select('*')
-    .eq('id', 115) 
-    .eq('table','bhiryani')
-    .single();
-
-  const product = {
-    id: data?.id || 'title',
-    name: data?.title || 'Biryani',
-    description: data?.metadata || 'Authentic biryani coming soon from Raw Halal Chicken.',
-    keywords: Array.isArray(data?.metakeywords) ? data.metakeywords : ['biryani', 'authentic', 'coming soon', 'halal'],
-    authorName: 'Raw Halal Chicken',
-    imageUrl: '/fdrd-removebg-preview-modified.png',
-    altImageUrl: '/fdrd-removebg-preview-modified.png',
-  };
-
-  return {
-    title: product.name,
-    description: product.description,
-    keywords: product.keywords,
-    publisher: 'Raw Halal Chicken',
-    
-    alternates: {
-      canonical: `https://www.rawhalalchicken.com/rawfreshchickenandmutton/bhiryani`,
-    },
-
-    openGraph: {
-      title: `${product.name} | Raw Halal Chicken`,
-      description: product.description,
-      url: `https://www.rawfreshchicken.com/rawfreshchickenandmutton/bhiryani`,
-      siteName: 'Raw Halal Chicken',
-      images: [
-        {
-          url: product.imageUrl,
-          width: 1200,
-          height: 630,
-          alt: `An image of ${product.name}`,
-        },
-        {
-          url: product.altImageUrl,
-          width: 800,
-          height: 600,
-          alt: `A different view of ${product.name}`,
-        },
-      ],
-      locale: 'en_IN',
-      type: 'website',
-    },
-
-    twitter: {
-      card: 'summary_large_image',
-      title: `${product.name} | Raw Halal Chicken`,
-      description: product.description,
-      creator: '@YourTwitterHandle',
-      images: [product.imageUrl],
-    },
-    
-    icons: {
-      icon: '/fdrd-removebg-preview-modified.png',
-      shortcut: '/fdrd-removebg-preview-modified.png',
-      apple: '/fdrd-removebg-preview-modified.png',
-    },
-    manifest: '/site.webmanifest',
-  };
-}
-
 import Biryani from "../bhiryani";
 import MobileHeader from "../MobileHeader";
-export default async function PageContent() {
-  const { data, error } = await supabase
-    .from('title')
-    .select('*')
-    .eq('id', 115) 
-    .single();
 
-  const pageHeading = data?.heading || 'Authentic Biryani Coming Soon';
+export default function PageContent() {
+  const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(true);
+  const [pageHeading, setPageHeading] = useState('Authentic Biryani Coming Soon');
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleRedirect = () => {
+      try {
+        if (typeof window === 'undefined') {
+          return;
+        }
+
+        // Check if screen is large enough for web version
+        const isLargeScreen = () => {
+          return window.innerWidth >= 1024; // 1024px and above for web version
+        };
+
+        // Check if it's a tablet (medium screen)
+        const isTablet = () => {
+          return window.innerWidth >= 768 && window.innerWidth < 1024;
+        };
+
+        // Determine the appropriate route based on screen size
+        let targetRoute = '/rawfreshchickenandmutton/bhiryani'; // Default for mobile
+
+        if (isLargeScreen()) {
+          targetRoute = '/web/bhiryani'; // Redirect to web version for large screens
+        } else if (isTablet()) {
+          targetRoute = '/web/bhiryani'; // Redirect to web version for tablets
+        }
+
+        // Only redirect if we're not already on the target route
+        if (window.location.pathname !== targetRoute) {
+          // Add a small delay to ensure proper hydration
+          const redirectTimer = setTimeout(() => {
+            router.replace(targetRoute);
+          }, 100);
+
+          // Fallback redirect after 2 seconds if the first one fails
+          const fallbackTimer = setTimeout(() => {
+            if (window.location.pathname === '/rawfreshchickenandmutton/bhiryani') {
+              router.replace(targetRoute);
+            }
+          }, 2000);
+
+          // Cleanup timers if component unmounts
+          return () => {
+            clearTimeout(redirectTimer);
+            clearTimeout(fallbackTimer);
+          };
+        } else {
+          setIsRedirecting(false);
+        }
+
+      } catch (err) {
+        console.error('Redirect error:', err);
+        setError('Failed to redirect. Please refresh the page.');
+        setIsRedirecting(false);
+      }
+    };
+
+    // Handle window resize events for responsive redirects
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        const currentPath = window.location.pathname;
+        const isLargeScreen = window.innerWidth >= 1024;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+        
+        if ((isLargeScreen || isTablet) && currentPath === '/rawfreshchickenandmutton/bhiryani') {
+          router.replace('/web/bhiryani');
+        } else if (window.innerWidth < 768 && currentPath === '/web/bhiryani') {
+          router.replace('/rawfreshchickenandmutton/bhiryani');
+        }
+      }
+    };
+
+    // Fetch page heading data
+    const fetchPageData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('title')
+          .select('*')
+          .eq('id', 115) 
+          .single();
+
+        if (data?.heading) {
+          setPageHeading(data.heading);
+        }
+      } catch (err) {
+        console.error('Error fetching page data:', err);
+      }
+    };
+
+    // Initial redirect and data fetch
+    handleRedirect();
+    fetchPageData();
+
+    // Add resize listener for responsive behavior
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [router]);
+
+  // Set redirecting to false after a reasonable timeout
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsRedirecting(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show loading state while redirecting
+  if (isRedirecting) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if redirect failed
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-center">
+          <p className="text-red-400 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-white text-black px-4 py-2 rounded"
+          >
+            Refresh Page
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Only show mobile content if screen is small enough
+  if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+    return null; // Don't render mobile content for larger screens
+  }
 
   return (
     <div className="animated-bg p-1  min-h-screen w-full relative">
