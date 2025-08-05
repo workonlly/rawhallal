@@ -151,8 +151,9 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
 
   return (
     <div>
-      <div className="text-center bg-white py-4 text-2xl font-bold text-gray-800">
-        {heading}
+      <div className="flex items-center justify-center bg-white py-4 text-2xl font-bold text-gray-800 gap-3">
+        <img src="/fdrd-removebg-preview-modified.png" alt="Raw Halal Chicken Logo" className="w-[50px] h-[50px] rounded-tl-lg rounded-br-lg bg-white box" />
+        <span>{heading}</span>
       </div>
       <OpenPage/>
     </div>

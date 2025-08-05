@@ -26,7 +26,7 @@ export default function OpenPage() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 to-green-100">
       <div className="w-full  bg-white rounded-3xl shadow-2xl p-6 flex flex-col gap-8 items-center relative">
         <button
-          className="absolute top-4 left-4 text-gray-400 hover:text-green-600 text-2xl font-bold focus:outline-none"
+          className="absolute -top-10 left-6 text-gray-500 hover:text-black  text-bold text-5xl font-bold focus:outline-none bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 z-10"
           onClick={() => router.back()}
           aria-label="Go Back"
         >
