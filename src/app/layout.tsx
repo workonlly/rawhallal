@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     "p:domain_verify": "7402d4a3b47fbed3cfbdb0b8674cc9d3",
     "yandex-verification": "b1aec977ba6a26bf",
     "msvalidate.01":"9ADFE7C80958C9A5FC9EB422DAF1E1A7",
+    "google-site-verification":"gMej0a7XTL3IsRLC_6OXtm9sP8Rl8TykZrkyxlxqOls",
   },
 };
 
