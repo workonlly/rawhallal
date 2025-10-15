@@ -7,15 +7,15 @@ export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { href: '/', label: '🏠 Home', icon: '🏠' },
-    { href: '/chicken', label: '🍗 Chicken', icon: '🍗' },
-    { href: '/fish', label: '🐟 Fish', icon: '🐟' },
-    { href: '/mutton', label: '🐐 Mutton', icon: '🐐' },
-    { href: '/contact', label: '🤝 Contact Us', icon: '🤝' },
-    { href: '/bhiryani', label: '🍛 Bhiryani', icon: '🍛' },
-    { href: '/aboutus', label: 'ℹ️ About Us', icon: 'ℹ️' },
-    { href: '/privacypolicy', label: '🔒 Privacy Policy', icon: '🔒' },
-    { href: '/termsandconditions', label: '📜 Terms & Conditions', icon: '📜' },
+    { href: '/', label: ' Home', icon: '🏠' },
+    { href: '/chicken', label: ' Chicken', icon: '🍗' },
+    { href: '/fish', label: ' Fish', icon: '🐟' },
+    { href: '/mutton', label: ' Mutton', icon: '🐐' },
+    { href: '/contact', label: ' Contact Us', icon: '🤝' },
+    { href: '/bhiryani', label: ' Bhiryani', icon: '🍛' },
+    { href: '/aboutus', label: 'ℹ About Us', icon: 'ℹ️' },
+    { href: '/privacypolicy', label: ' Privacy Policy', icon: '🔒' },
+    { href: '/termsandconditions', label: ' Terms & Conditions', icon: '📜' },
   ];
 
   return (
