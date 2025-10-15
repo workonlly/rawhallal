@@ -121,10 +121,10 @@ export default async function PageContent() {
             {/* main logo area */}
             <div className="flex flex-row justify-center items-center h-15 pt-4 lg:pt-0">
               <a href="/"><img src="/fdrd-removebg-preview-modified.png" alt="Raw Halal Chicken Logo" className="absolute w-[50px] h-[50px] rounded-tl-lg rounded-br-lg bg-white left-2 top-2 box lg:left-2 lg:top-2" /></a>
-              <p className='text-white text-lg lg:text-2xl font-bold text-center px-16 lg:px-0'>{pageHeading}</p>
+              <p className='text-white  lg:text-2xl sm:text-xl font-bold text-center px-16 lg:px-0'>{pageHeading}</p>
             </div>
             {/* main logo area end */}
-            <div className="h-[2px]  animated-bg absolute w-[93%]  right-0"></div>
+            <div className="h-[3px]  animated-bg absolute w-[93%]  right-0"></div>
            
     
              {/* working area */}
