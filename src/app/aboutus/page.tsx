@@ -1,12 +1,15 @@
 "use client";
 
 import React from 'react';
-import Footer from '../web/footer';
+import Footer from '../footer';
+import MobileMenu from '../components/MobileMenu';
 
 
 const AboutUs = () => {
-  return (<>
-    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  return (
+    <>
+      <MobileMenu />
+      <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
         
         {/* Header */}

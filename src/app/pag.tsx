@@ -1,17 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react'
-import supabase  from '../../../supabase'
-import { fresh } from '../data/api';
+import supabase  from '../../supabase'
+import { fresh } from './data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from '../store/productSlice'; // Corrected path
+import { setSelectedProduct } from './store/productSlice'; // Corrected path
 import { useRouter } from 'next/navigation';
-import { SelectedProduct } from '../store/types';
+import { SelectedProduct } from './store/types';
 import Footer from './footer';
-import { isMobileDevice } from '../utils/deviceDetection';
-
 
 
 
@@ -39,14 +37,6 @@ export default function Home() {
     fetchProducts();
     fresh().then(setFolderMap)
   }, []);
-
-  // Enhanced mobile detection for shared URLs
-  useEffect(() => {
-    if (isMobileDevice()) {
-      // Mobile: route to mobile version
-      router.replace('/rawfreshchickenandmutton');
-    }
-  }, [router]);
 
 
   // Function to create a URL-safe slug from product.maintext with reversible icons

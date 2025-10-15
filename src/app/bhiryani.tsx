@@ -2,12 +2,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 
-import{fish,chicken,mutton} from '../data/api'
+import{fish,chicken,mutton} from './data/api'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from '../store/productSlice';
+import { setSelectedProduct } from './store/productSlice';
 import { useRouter } from 'next/navigation';
 import Footer from './footer';
 

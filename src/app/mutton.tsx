@@ -1,16 +1,15 @@
 'use client';
 import React, { use } from 'react'
 import { useEffect, useState } from 'react'
-import supabase  from '../../../supabase'
-import{fish,chicken,mutton} from '../data/api'
+import supabase  from '../../supabase'
+import{fish,chicken,mutton} from './data/api'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from '../store/productSlice';
+import { setSelectedProduct } from './store/productSlice';
 import { useRouter } from 'next/navigation';
 import Footer from './footer';
-import { isMobileDevice } from '../utils/deviceDetection';
 
 interface Product {
   id: number;
@@ -42,51 +41,43 @@ interface Product {
   }
 
 
-function Fish() {
-  const [fishProducts, setFishProducts] = useState<Product[]>([]);
-  const [fishImages, setFishImages] = useState<Record<string, string[]>>({});
+function Mutton() {
+  const [muttonProducts, setMuttonProducts] = useState<Product[]>([]);
+  const [muttonImages, setMuttonImages] = useState<Record<string, string[]>>({});
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    if (isMobileDevice()) {
-      router.replace('/rawfreshchickenandmutton/fish');
-    }
-  }, [router]);
-
+ 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data, error } = await supabase.from('fish').select('*')
+      const { data, error } = await supabase.from('mutton').select('*')
       if (error) console.error('Error:', error)
       else {
-        setFishProducts(data as Product[])
+        setMuttonProducts(data as Product[])
       }
     }
     fetchProducts()
-    fish().then(setFishImages)
+    mutton().then(setMuttonImages)
   }, [])
 
 
   return (
-    <div className="  h-[88%] bg-white/20 w-full   text-center overflow-auto rounded-sm scrollbar-custom  ">
-       
-
-
-                    <main id="fish">
-                        <div className="text-3xl font-bold text-white m-5 ">Fresh fish </div>
-                        <div className="rounded-md   flex items-center justify-center"><iframe width="560" height="315" src="https://www.youtube.com/embed/UhhBfux2JDM?si=uhYTV1J04PTi9o6s" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe></div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
-                          {
-                            fishProducts.map((items) => {
-                              const folderName = String(items.id);
-                              const urls = fishImages[folderName] || [];
-                              return (
-                                <div
-                                  className="bg-white/80 backdrop-blur-md p-6 h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
-                                  onClick={() => {
-                                    dispatch(setSelectedProduct({
-                                      id: items.id,
-                                      table: 'fish',
+    <div className="h-[88%] bg-white/20 w-full text-center overflow-auto rounded-sm scrollbar-custom">
+      <main id="mutton">
+        <div className="text-2xl md:text-3xl font-bold text-white m-3 md:m-5">Fresh Mutton</div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 m-3 md:m-10">
+          {
+            muttonProducts.map((items) => {
+              const folderName = String(items.id);
+              const urls = muttonImages[folderName] || [];
+              return (
+                <div
+                  className="bg-white/80 backdrop-blur-md p-4 md:p-6 h-auto md:h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
+                  onClick={() => {
+                    dispatch(setSelectedProduct({
+                      id: items.id,
+                      table: 'mutton',
                                       maintext: items.maintext,
                                       sectext: items.sectext,
                                       price: items.price,
@@ -145,11 +136,9 @@ function Fish() {
                        </div>
     
                      </main>
-
-
       <Footer />
     </div>   
   )
 }
 
-export default Fish;
+export default Mutton;

@@ -1,16 +1,15 @@
 'use client';
 import React, { use } from 'react'
 import { useEffect, useState } from 'react'
-import supabase  from '../../../supabase'
-import{chicken} from '../data/api'
+import supabase  from '../../supabase'
+import{fish,chicken,mutton} from './data/api'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from '../store/productSlice';
+import { setSelectedProduct } from './store/productSlice';
 import { useRouter } from 'next/navigation';
 import Footer from './footer';
-import { isMobileDevice } from '../utils/deviceDetection';
 
 interface Product {
   id: number;
@@ -19,32 +18,6 @@ interface Product {
   price:number;
   }
 
-
-
-function Chicken() {
-  const [chickenProducts, setChickenProducts] = useState<Product[]>([]);
-  const [chickenImages, setChickenImages] = useState<Record<string, string[]>>({});
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isMobileDevice()) {
-      router.replace('/rawfreshchickenandmutton/chicken');
-    }
-  }, [router]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const { data, error } = await supabase.from('chicken').select('*')
-      if (error) console.error('Error:', error)
-      else {
-        setChickenProducts(data as Product[])
-      }
-    }
-    fetchProducts()
-    chicken().then(setChickenImages)
-  }, [])
- 
   // Function to create a URL-safe slug from items.maintext with reversible icons
   function toSlug(text: string) {
     return text
@@ -67,33 +40,57 @@ function Chicken() {
       .replace(/[;]/g, '_SEMICOLON_'); // Replace ; with _SEMICOLON_
   }
 
+
+function Fish() {
+  const [fishProducts, setFishProducts] = useState<Product[]>([]);
+  const [fishImages, setFishImages] = useState<Record<string, string[]>>({});
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase.from('fish').select('*')
+      if (error) console.error('Error:', error)
+      else {
+        setFishProducts(data as Product[])
+      }
+    }
+    fetchProducts()
+    fish().then(setFishImages)
+  }, [])
+
+
   return (
-    <div className="  h-[88%] bg-white/20 w-full  text-center overflow-auto rounded-sm scrollbar-custom  ">
-                    <main id="chick">
-                        <div className="text-3xl font-bold text-white m-5 ">CHICKEN </div>
-                        
-                        <div className="rounded-md   flex items-center justify-center"> <iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/9F4W-m0gwVw"
-  title="YouTube video player"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
-</div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
-                          {
-                            chickenProducts.map((items) => {
-                              const folderName = String(items.id);
-                              const urls = chickenImages[folderName] || [];
-                              return (
-                                <div
-                                  className="bg-white/80 backdrop-blur-md p-6 h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
-                                  onClick={() => {
-                                    dispatch(setSelectedProduct({
-                                      id: items.id,
-                                      table: 'chicken',
+    <div className="h-[88%] bg-white/20 w-full text-center overflow-auto rounded-sm scrollbar-custom">
+      <main id="fish">
+        <div className="text-2xl md:text-3xl font-bold text-white m-3 md:m-5">Fresh Fish</div>
+        
+        <div className="rounded-md flex items-center justify-center px-3 md:px-0">
+          <iframe 
+            width="100%" 
+            height="200" 
+            src="https://www.youtube.com/embed/UhhBfux2JDM?si=uhYTV1J04PTi9o6s" 
+            title="YouTube video player" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerPolicy="strict-origin-when-cross-origin" 
+            allowFullScreen
+            className="max-w-[560px] md:h-[315px]"
+          ></iframe>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 m-3 md:m-10">
+          {
+            fishProducts.map((items) => {
+              const folderName = String(items.id);
+              const urls = fishImages[folderName] || [];
+              return (
+                <div
+                  className="bg-white/80 backdrop-blur-md p-4 md:p-6 h-auto md:h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
+                  onClick={() => {
+                    dispatch(setSelectedProduct({
+                      id: items.id,
+                                      table: 'fish',
                                       maintext: items.maintext,
                                       sectext: items.sectext,
                                       price: items.price,
@@ -139,11 +136,11 @@ function Chicken() {
                                       target="_blank" rel="noopener noreferrer"
                                     >
                                       Order via WhatsApp
-                                      <img
-                                        src="/WhatsApp.svg.webp"
-                                        alt="whatsapp"
-                                        className="h-[3vh] ml-2"
-                                      />
+                                                            <img
+                        src="/WhatsApp.svg.webp"
+                        alt="whatsapp"
+                        className="h-[3vh] ml-2"
+                      />
                                     </a>
                                   </div>
                                 </div>
@@ -152,10 +149,11 @@ function Chicken() {
                        </div>
     
                      </main>
-         
+
+
       <Footer />
     </div>   
   )
 }
 
-export default Chicken;
+export default Fish;
