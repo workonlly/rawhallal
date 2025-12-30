@@ -1,11 +1,24 @@
 'use client';
 import { useSelector } from 'react-redux';
-import { selectSelectedProduct } from '../../store/productSlice';
-import { SelectedProduct } from '../../store/types';
+import { selectSelectedProduct } from '../store/productSlice';
+import { SelectedProduct } from '../store/types';
 import { useRouter } from 'next/navigation';
 
-export default function OpenPage() {
-  const product = useSelector(selectSelectedProduct) as SelectedProduct | null;
+type ProductData = SelectedProduct & {
+  heading?: string;
+  metadata?: string;
+  metakeywords?: string[];
+  image?: string[];
+};
+
+type OpenPageProps = {
+  productFromServer?: ProductData;
+  slug?: string;
+};
+
+export default function OpenPage({ productFromServer }: OpenPageProps) {
+  const productFromStore = useSelector(selectSelectedProduct) as ProductData | null;
+  const product = productFromStore ?? productFromServer ?? null;
   const router = useRouter();
 
   if (!product) return (

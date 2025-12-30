@@ -97,7 +97,7 @@ function Fish() {
                                       image: urls,
                                     }));
                                     const slug = toSlug(items.maintext);
-                                    router.push(`/open/${slug}`); // Use custom slug
+                                    router.push(`/${encodeURIComponent(slug)}`); // Navigate to [slug] page
                                   }}
                                 >
                                   <div className="space-y-4">

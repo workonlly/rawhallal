@@ -1,42 +1,39 @@
 import React from 'react'
 import OpenPage from './extra'
-import supabase from "../../../../supabase";
+import supabase from '../../../supabase';
 
-// Function to reconstruct original text from slug
+const SUPABASE_URL = 'https://akqmahrvurcswatrffln.supabase.co';
+
 function fromSlug(slug: string) {
   let result = slug
-    .replace(/_SPACE_/g, ' ') // Reconstruct spaces
-    .replace(/_SLASH_/g, '/') // Reconstruct slashes
-    .replace(/_AND_/g, '&') // Reconstruct &
-    .replace(/_HASH_/g, '#') // Reconstruct #
-    .replace(/_AT_/g, '@') // Reconstruct @
-    .replace(/_PERCENT_/g, '%') // Reconstruct %
-    .replace(/_PLUS_/g, '+') // Reconstruct +
-    .replace(/_EQUALS_/g, '=') // Reconstruct =
-    .replace(/_QUESTION_/g, '?') // Reconstruct ?
-    .replace(/_EXCLAMATION_/g, '!') // Reconstruct !
-    .replace(/_DOLLAR_/g, '$') // Reconstruct $
-    .replace(/_STAR_/g, '*') // Reconstruct *
-    .replace(/_COMMA_/g, ',') // Reconstruct ,
-    .replace(/_DOT_/g, '.') // Reconstruct .
-    .replace(/_COLON_/g, ':') // Reconstruct :
-    .replace(/_SEMICOLON_/g, ';'); // Reconstruct ;
-  
-  // Handle parentheses - replace first _PAREN_ with ( and second with )
+    .replace(/_SPACE_/g, ' ')
+    .replace(/_SLASH_/g, '/')
+    .replace(/_AND_/g, '&')
+    .replace(/_HASH_/g, '#')
+    .replace(/_AT_/g, '@')
+    .replace(/_PERCENT_/g, '%')
+    .replace(/_PLUS_/g, '+')
+    .replace(/_EQUALS_/g, '=')
+    .replace(/_QUESTION_/g, '?')
+    .replace(/_EXCLAMATION_/g, '!')
+    .replace(/_DOLLAR_/g, '$')
+    .replace(/_STAR_/g, '*')
+    .replace(/_COMMA_/g, ',')
+    .replace(/_DOT_/g, '.')
+    .replace(/_COLON_/g, ':')
+    .replace(/_SEMICOLON_/g, ';');
   let parenCount = 0;
   result = result.replace(/_PAREN_/g, () => {
     parenCount++;
     return parenCount === 1 ? '(' : ')';
   });
-  
   return result;
 }
 
-// Function to search for product across all tables
 async function searchProductBySlug(searchSlug: string) {
   const tables = ['fresh1', 'chicken', 'fish', 'mutton'];
   const originalText = fromSlug(searchSlug);
-  
+
   for (const table of tables) {
     try {
       const { data, error } = await supabase
@@ -44,33 +41,52 @@ async function searchProductBySlug(searchSlug: string) {
         .select('*')
         .eq('maintext', originalText)
         .single();
-      
-      if (error) {
-        continue;
-      }
-      
-      if (data) {
-        return {
-          ...data,
-          table
-        };
-      }
+
+      if (error) continue;
+      if (data) return { ...data, table };
     } catch (err) {
-      // Silent error handling
+      // ignore
     }
   }
-  
   return null;
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+// Fetch product images from the corresponding bucket and folder (folder = product id)
+async function fetchImages(table: string, productId: number) {
+  const bucketMap: Record<string, string> = {
+    fresh1: 'fresh',
+    chicken: 'chicken',
+    fish: 'fish',
+    mutton: 'mutton',
+  };
+  const bucket = bucketMap[table];
+  if (!bucket) return [];
+
+  const folderName = String(productId);
+  const { data: files, error } = await supabase
+    .storage
+    .from(bucket)
+    .list(folderName);
+
+  if (error || !files) return [];
+
+  return files
+    .filter((file) =>
+      file.name &&
+      !file.name.startsWith('.') &&
+      /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
+    )
+    .map((file) =>
+      `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${folderName}/${file.name}`
+    );
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const decodedSlug = decodeURIComponent(slug);
-  
-  // Search for product by slug
   const product = await searchProductBySlug(slug);
-  
-  // Default metadata if product not found
+  const images = product ? await fetchImages(product.table, product.id) : [];
+
   const defaultProduct = {
     id: 'product',
     name: decodedSlug || 'Product',
@@ -81,15 +97,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     altImageUrl: '/fdrd-removebg-preview-modified.png',
   };
 
-  // Use found product data or default
   const productData = product ? {
     id: product.id,
     name: product.title || product.maintext,
     description: product.metadata || 'Fresh products from Raw Halal Chicken.',
     keywords: Array.isArray(product.metakeywords) ? product.metakeywords : ['raw', 'halal', 'chicken', 'fresh', product.table || 'products'],
     authorName: 'Raw Halal Chicken',
-    imageUrl: '/fdrd-removebg-preview-modified.png',
-    altImageUrl: '/fdrd-removebg-preview-modified.png',
+    imageUrl: images[0] || '/fdrd-removebg-preview-modified.png',
+    altImageUrl: images[1] || images[0] || '/fdrd-removebg-preview-modified.png',
   } : defaultProduct;
 
   return {
@@ -97,34 +112,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: productData.description,
     keywords: productData.keywords,
     publisher: 'Raw Halal Chicken',
-    
     alternates: {
-      canonical: `https://www.rawhalalchicken.com/open/${slug}`,
+      canonical: `https://www.rawhalalchicken.com/${slug}`,
     },
-
     openGraph: {
       title: `${productData.name} | Raw Halal Chicken`,
       description: productData.description,
-      url: `https://www.rawhalalchicken.com/open/${slug}`,
+      url: `https://www.rawhalalchicken.com/${slug}`,
       siteName: 'Raw Halal Chicken',
       images: [
-        {
-          url: productData.imageUrl,
-          width: 1200,
-          height: 630,
-          alt: `An image of ${productData.name}`,
-        },
-        {
-          url: productData.altImageUrl,
-          width: 800,
-          height: 600,
-          alt: `A different view of ${productData.name}`,
-        },
+        { url: productData.imageUrl, width: 1200, height: 630, alt: `An image of ${productData.name}` },
+        { url: productData.altImageUrl, width: 800, height: 600, alt: `A different view of ${productData.name}` },
       ],
       locale: 'en_IN',
       type: 'website',
     },
-
     twitter: {
       card: 'summary_large_image',
       title: `${productData.name} | Raw Halal Chicken`,
@@ -132,7 +134,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       creator: '@YourTwitterHandle',
       images: [productData.imageUrl],
     },
-    
     icons: {
       icon: '/fdrd-removebg-preview-modified.png',
       shortcut: '/fdrd-removebg-preview-modified.png',
@@ -142,11 +143,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-async function page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  
-  // Search for product by slug to get the heading
+async function page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const product = await searchProductBySlug(slug);
+  const images = product ? await fetchImages(product.table, product.id) : [];
   const heading = product?.heading || product?.maintext || 'Product Details';
 
   return (
@@ -155,9 +155,9 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
         <img src="/fdrd-removebg-preview-modified.png" alt="Raw Halal Chicken Logo" className="w-[50px] h-[50px] rounded-tl-lg rounded-br-lg bg-white box" />
         <span>{heading}</span>
       </div>
-      <OpenPage/>
+      <OpenPage productFromServer={product ? { ...product, image: images } : undefined} slug={slug} />
     </div>
-  )
+  );
 }
 
 export default page

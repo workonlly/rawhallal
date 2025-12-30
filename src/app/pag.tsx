@@ -63,7 +63,7 @@ export default function Home() {
 
 
   return (
-    <div className="  h-[91%] bg-white/20 w-full   text-center overflow-auto rounded-sm scrollbar-custom  ">
+    <div className="   bg-white/20 w-full   text-center overflow-auto rounded-sm scrollbar-custom  ">
       <main className="">
       
         <div className="swiper mt-5">
@@ -114,7 +114,7 @@ export default function Home() {
                     image: urls,
                   } as SelectedProduct));
                   const slug = toSlug(product.maintext);
-                  router.push(`/open/${slug}`); // Use custom slug
+                  router.push(`/${encodeURIComponent(slug)}`); // Route to new [slug] page
                 }}
               >
                 <div className="w-full flex justify-center items-center mb-3">
