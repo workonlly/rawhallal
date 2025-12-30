@@ -81,8 +81,8 @@ async function fetchImages(table: string, productId: number) {
     );
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const product = await searchProductBySlug(slug);
   const images = product ? await fetchImages(product.table, product.id) : [];
@@ -143,8 +143,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-async function page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+async function page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const product = await searchProductBySlug(slug);
   const images = product ? await fetchImages(product.table, product.id) : [];
   const heading = product?.heading || product?.maintext || 'Product Details';
