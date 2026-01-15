@@ -3,7 +3,63 @@
 import React from 'react';
 import Footer from '../footer';
 import MobileMenu from '../components/MobileMenu';
+import type { Metadata } from 'next';
 
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Terms & Conditions - Raw Halal Chicken',
+    description: 'Read the terms and conditions for using Raw Halal Chicken’s website and ordering fresh country/desi chicken, mutton, and fish for home delivery in Noida. Learn about your rights, responsibilities, and our policies.',
+    keywords: [
+      'terms and conditions',
+      'terms of service',
+      'Noida meat delivery',
+      'country chicken terms',
+      'mutton terms',
+      'raw halal chicken',
+      'online meat terms',
+      'product offer terms',
+    ],
+    publisher: 'Raw Halal Chicken',
+    alternates: {
+      canonical: `https://rawhalal.com/termsandconditions`,
+    },
+    openGraph: {
+      title: 'Terms & Conditions - Raw Halal Chicken',
+      description: 'Review the terms and conditions for using Raw Halal Chicken’s website and ordering fresh meat in Noida.',
+      url: `https://rawhalal.com/termsandconditions`,
+      siteName: 'Raw Halal Chicken',
+      images: [
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 1200,
+          height: 630,
+          alt: 'Terms & Conditions - Raw Halal Chicken',
+        },
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 800,
+          height: 600,
+          alt: 'Terms & Conditions - Raw Halal Chicken',
+        },
+      ],
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Terms & Conditions - Raw Halal Chicken',
+      description: 'Read the terms and conditions for Raw Halal Chicken’s online meat delivery in Noida.',
+      creator: '@YourTwitterHandle',
+      images: ['/fdrd-removebg-preview-modified.png'],
+    },
+    icons: {
+      icon: '/fdrd-removebg-preview-modified.png',
+      shortcut: '/fdrd-removebg-preview-modified.png',
+      apple: '/fdrd-removebg-preview-modified.png',
+    },
+    manifest: '/site.webmanifest',
+  };
+}
 
 const TermsAndConditions = () => {
   return (

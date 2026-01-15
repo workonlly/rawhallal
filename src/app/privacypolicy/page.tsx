@@ -2,6 +2,63 @@
 import React from 'react';
 import Footer from '../footer';
 import MobileMenu from '../components/MobileMenu';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Privacy Policy - Raw Halal Chicken',
+    description: 'Read the privacy policy of Raw Halal Chicken. Learn how we collect, use, and protect your personal information when you order fresh country/desi chicken, mutton, and fish for home delivery in Noida.',
+    keywords: [
+      'privacy policy',
+      'data protection',
+      'personal information',
+      'Noida meat delivery',
+      'country chicken privacy',
+      'mutton privacy',
+      'raw halal chicken',
+      'online meat privacy',
+    ],
+    publisher: 'Raw Halal Chicken',
+    alternates: {
+      canonical: `https://rawhalal.com/privacypolicy`,
+    },
+    openGraph: {
+      title: 'Privacy Policy - Raw Halal Chicken',
+      description: 'How Raw Halal Chicken collects, uses, and safeguards your personal information for home delivery of fresh meat in Noida.',
+      url: `https://rawhalal.com/privacypolicy`,
+      siteName: 'Raw Halal Chicken',
+      images: [
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 1200,
+          height: 630,
+          alt: 'Privacy Policy - Raw Halal Chicken',
+        },
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 800,
+          height: 600,
+          alt: 'Privacy Policy - Raw Halal Chicken',
+        },
+      ],
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Privacy Policy - Raw Halal Chicken',
+      description: 'Read how Raw Halal Chicken protects your privacy and personal data for online meat delivery in Noida.',
+      creator: '@YourTwitterHandle',
+      images: ['/fdrd-removebg-preview-modified.png'],
+    },
+    icons: {
+      icon: '/fdrd-removebg-preview-modified.png',
+      shortcut: '/fdrd-removebg-preview-modified.png',
+      apple: '/fdrd-removebg-preview-modified.png',
+    },
+    manifest: '/site.webmanifest',
+  };
+}
 
 const PrivacyPolicy = () => {
   return (

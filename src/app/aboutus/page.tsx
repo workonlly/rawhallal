@@ -3,7 +3,62 @@
 import React from 'react';
 import Footer from '../footer';
 import MobileMenu from '../components/MobileMenu';
+import type { Metadata } from 'next';
 
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'About Us - Country/Desi Chicken & Mutton Home Delivery Noida | Raw Halal',
+    description: 'Learn about Raw Halal - Your trusted source for fresh country/desi chicken and mutton home delivery in Noida. 100% fresh, never frozen meat delivered in 1 hour. Serving Noida for 4+ years.',
+    keywords: [
+      'country chicken Noida',
+      'desi chicken home delivery',
+      'mutton delivery Noida',
+      'fresh halal meat Noida',
+      'raw chicken delivery',
+      'about raw halal',
+    ],
+    publisher: 'Raw Halal Chicken',
+    alternates: {
+      canonical: `https://rawhalal.com/aboutus`,
+    },
+    openGraph: {
+      title: 'About Us - Country/Desi Chicken & Mutton Home Delivery Noida | Raw Halal',
+      description: 'Learn about Raw Halal - Your trusted source for fresh country/desi chicken and mutton home delivery in Noida. 100% fresh, never frozen meat delivered in 1 hour. Serving Noida for 4+ years.',
+      url: `https://rawhalal.com/aboutus`,
+      siteName: 'Raw Halal Chicken',
+      images: [
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 1200,
+          height: 630,
+          alt: 'An image of About Us - Country/Desi Chicken & Mutton Home Delivery Noida | Raw Halal',
+        },
+        {
+          url: '/fdrd-removebg-preview-modified.png',
+          width: 800,
+          height: 600,
+          alt: 'A different view of About Us - Country/Desi Chicken & Mutton Home Delivery Noida | Raw Halal',
+        },
+      ],
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'About Us - Country/Desi Chicken & Mutton Home Delivery Noida | Raw Halal',
+      description: 'Learn about Raw Halal - Your trusted source for fresh country/desi chicken and mutton home delivery in Noida. 100% fresh, never frozen meat delivered in 1 hour. Serving Noida for 4+ years.',
+      creator: '@YourTwitterHandle',
+      images: ['/fdrd-removebg-preview-modified.png'],
+    },
+    icons: {
+      icon: '/fdrd-removebg-preview-modified.png',
+      shortcut: '/fdrd-removebg-preview-modified.png',
+      apple: '/fdrd-removebg-preview-modified.png',
+    },
+    manifest: '/site.webmanifest',
+  };
+}
 
 const AboutUs = () => {
   return (
