@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import Footer from '../footer';
 import MobileMenu from '../components/MobileMenu';
