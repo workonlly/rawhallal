@@ -4,9 +4,18 @@ import supabase from '../../../supabase';
 
 const SUPABASE_URL = 'https://akqmahrvurcswatrffln.supabase.co';
 
+function safeDecode(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 function fromSlug(slug: string) {
-  let result = slug
-    .replace(/_SPACE_/g, ' ')
+  let result = safeDecode(slug)
+    .replace(/\+/g, ' ')
+    .replace(/_SPACE_/gi, ' ')
     .replace(/_SLASH_/g, '/')
     .replace(/_AND_/g, '&')
     .replace(/_HASH_/g, '#')
@@ -21,7 +30,11 @@ function fromSlug(slug: string) {
     .replace(/_COMMA_/g, ',')
     .replace(/_DOT_/g, '.')
     .replace(/_COLON_/g, ':')
-    .replace(/_SEMICOLON_/g, ';');
+    .replace(/_SEMICOLON_/g, ';')
+    .replace(/_LPAREN_/g, '(')
+    .replace(/_RPAREN_/g, ')')
+    .trim()
+    .replace(/\s+/g, ' ');
   let parenCount = 0;
   result = result.replace(/_PAREN_/g, () => {
     parenCount++;
@@ -30,21 +43,61 @@ function fromSlug(slug: string) {
   return result;
 }
 
+function normalizeForMatch(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 async function searchProductBySlug(searchSlug: string) {
   const tables = ['fresh1', 'chicken', 'fish', 'mutton'];
   const originalText = fromSlug(searchSlug);
+  const normalizedWithoutRaw = originalText.replace(/^raw\s+/i, '').trim();
+  const normalizedWithoutPrefixWords = originalText
+    .replace(/^(raw|fresh|halal)\s+/gi, '')
+    .replace(/^(raw|fresh|halal)\s+/gi, '')
+    .trim();
+  const candidates = Array.from(new Set([
+    originalText,
+    normalizedWithoutRaw,
+    normalizedWithoutPrefixWords,
+  ].filter(Boolean)));
+  const normalizedCandidates = candidates.map(normalizeForMatch);
 
   for (const table of tables) {
+    for (const candidate of candidates) {
+      try {
+        const { data, error } = await supabase
+          .from(table)
+          .select('*')
+          .ilike('maintext', candidate)
+          .maybeSingle();
+
+        if (error) continue;
+        if (data) return { ...data, table };
+      } catch {
+        // ignore
+      }
+    }
+
     try {
       const { data, error } = await supabase
         .from(table)
-        .select('*')
-        .eq('maintext', originalText)
-        .single();
+        .select('*');
 
-      if (error) continue;
-      if (data) return { ...data, table };
-    } catch (err) {
+      if (error || !data) continue;
+
+      const normalizedMatch = data.find((item) => {
+        const maintext = typeof item?.maintext === 'string' ? item.maintext : '';
+        const normalizedMaintext = normalizeForMatch(maintext);
+        return normalizedCandidates.includes(normalizedMaintext);
+      });
+
+      if (normalizedMatch) return { ...normalizedMatch, table };
+    } catch {
       // ignore
     }
   }
@@ -83,7 +136,7 @@ async function fetchImages(table: string, productId: number) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const decodedSlug = decodeURIComponent(slug);
+  const decodedSlug = fromSlug(slug);
   const product = await searchProductBySlug(slug);
   const images = product ? await fetchImages(product.table, product.id) : [];
 

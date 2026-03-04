@@ -23,7 +23,8 @@ interface Product {
     return text
       .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
       .replace(/[\/\\]/g, '_SLASH_') // Replace slashes with _SLASH_
-      .replace(/[()]/g, '_PAREN_') // Replace parentheses with _PAREN_
+      .replace(/\(/g, '_LPAREN_') // Replace ( with _LPAREN_
+      .replace(/\)/g, '_RPAREN_') // Replace ) with _RPAREN_
       .replace(/[&]/g, '_AND_') // Replace & with _AND_
       .replace(/[#]/g, '_HASH_') // Replace # with _HASH_
       .replace(/[@]/g, '_AT_') // Replace @ with _AT_
@@ -73,6 +74,7 @@ function Mutton() {
               const urls = muttonImages[folderName] || [];
               return (
                 <div
+                  key={items.id}
                   className="bg-white/80 backdrop-blur-md p-4 md:p-6 h-auto md:h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
                   onClick={() => {
                     dispatch(setSelectedProduct({

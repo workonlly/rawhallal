@@ -86,6 +86,7 @@ function Fish() {
               const urls = fishImages[folderName] || [];
               return (
                 <div
+                  key={items.id}
                   className="bg-white/80 backdrop-blur-md p-4 md:p-6 h-auto md:h-[85vh] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col justify-between hover:scale-105 transition-transform duration-300 hover:shadow-[0_12px_40px_rgba(34,197,94,0.3)] border border-green-100 cursor-pointer"
                   onClick={() => {
                     dispatch(setSelectedProduct({
