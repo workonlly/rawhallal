@@ -96,22 +96,7 @@ const AboutUs = () => {
           </p>
         </section>
 
-        {/* Benefits Section */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 border-b-2 border-black pb-2 inline-block">
-            The Benefits of Ordering From Us
-          </h2>
-          <div className="space-y-6">
-            <div className="bg-gray-100 border-l-4 border-black p-6 rounded-r-lg">
-              <h3 className="font-bold text-black text-xl mb-2">Cash on Delivery (COD)</h3>
-              <p className="text-gray-800">We offer COD to give you the freedom to inspect the quality and freshness of our products before you pay.</p>
-            </div>
-            <div className="bg-gray-100 border-l-4 border-black p-6 rounded-r-lg">
-              <h3 className="font-bold text-black text-xl mb-2">Freshness Guarantee</h3>
-              <p className="text-gray-800">If you ever receive a frozen product, complain to us immediately and return it. We prioritize delivering only fresh products and take prompt action to rectify any issues.</p>
-            </div>
-          </div>
-        </section>
+    
 
         {/* Vision & Mission Section */}
         <section className="mb-10 md:flex md:gap-10 space-y-8 md:space-y-0">
