@@ -117,11 +117,11 @@ const AboutUs = () => {
         <section className="mb-10 md:flex md:gap-10 space-y-8 md:space-y-0">
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-black pb-2 inline-block">Our Vision</h2>
-            <p className="text-gray-800 leading-relaxed">To provide fresh and high quality, healthier Fresh chicken, mutton, and fish through sustainable practices. We aim to become a trusted brand known for quality and safety.</p>
+            <p className="text-gray-800 leading-relaxed">Just provide ever fresh and high quality, healthier Fresh chicken, mutton, and fish through sustainable practices. Our aim to become a trusted brand known for quality and safety.</p>
           </div>
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-black pb-2 inline-block">Our Mission</h2>
-            <p className="text-gray-800 leading-relaxed">To expand more product range and delivery zones to ensure quick delivery and superior customer service, helping our customers live a healthier lifestyle.</p>
+            <p className="text-gray-800 leading-relaxed">To expand more product range and delivery zones for the best services.</p>
           </div>
         </section>
 
