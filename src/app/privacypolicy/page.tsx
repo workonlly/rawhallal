@@ -70,50 +70,36 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
             Privacy Policy
           </h1>
-          <p className="text-md text-gray-500">
-            Last Updated: July 19, 2025
-          </p>
         </header>
 
         <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
           <p>
-            We at <strong>Raw Halal Chicken</strong> ("we," "us," "our") are committed to protecting the privacy of everyone who visits our website. This Privacy Policy outlines how we collect, use, and safeguard your personal information.
+            At Raw Chicken, your privacy is important to us. Here's a quick look at how we handle your personal information.
           </p>
 
-          <h2 className="text-2xl font-semibold text-gray-800 mt-8">1. Information We Collect</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mt-8">1. What We Gather</h2>
           <p>
-            To fulfill your orders and provide our services, we may collect the following personal information:
+            When you place an order, we ask for some personal details: your name, phone number, email address, and where you'd like your order delivered. We also keep records of your purchases to ensure we can offer you the best possible service.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Personal Identification Information:</strong> Name, phone number, and email address.</li>
-            <li><strong>Delivery Information:</strong> Physical address for order delivery.</li>
-            <li><strong>Order Details:</strong> Information about the products you purchase from us.</li>
-          </ul>
 
-          <h2 className="text-2xl font-semibold text-gray-800 mt-8">2. How We Use Your Information</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mt-8">2. What We Do With Your Information</h2>
           <p>
-            Your personal information is used exclusively for internal purposes to ensure a smooth customer experience. These purposes include:
+            All your personal information is used exclusively for management and delivery of your order, its tracking, assistance with any inquiries and development of our service.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Processing and delivering your orders.</li>
-            <li>Communicating with you about your order status.</li>
-            <li>Providing customer support.</li>
-            <li>Improving our products and services.</li>
-          </ul>
 
-          <h2 className="text-2xl font-semibold text-gray-800 mt-8">3. Information Sharing and Confidentiality</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mt-8">3. Privacy Policy</h2>
           <p>
-            We take your privacy very seriously. We guarantee that your personal information will be kept completely confidential. We <strong>do not sell, trade, or share</strong> your personal information with any outside parties, third parties, or unaffiliated companies for any reason whatsoever.
+            We do not share any private data or sell or otherwise transfer it to third parties.
           </p>
 
           <h2 className="text-2xl font-semibold text-gray-800 mt-8">4. Data Security</h2>
           <p>
-            We implement reasonable security measures to protect your information from unauthorized access, alteration, or disclosure.
+            Your information remains protected from any unauthorized uses and leaks.
           </p>
 
           <h2 className="text-2xl font-semibold text-gray-800 mt-8">5. Contact Us</h2>
           <p>
-            If you have any questions or concerns about our Privacy Policy, please do not hesitate to contact us.
+            Feel free to contact us should you have any questions regarding our privacy policy.
           </p>
         </div>
        
