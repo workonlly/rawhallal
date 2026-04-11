@@ -77,21 +77,22 @@ const AboutUs = () => {
 
         {/* Introduction Section */}
         <section className="mb-10 text-gray-800 leading-relaxed">
+          <h3 className="text-xl font-semibold text-black mb-3">Raw Chicken</h3>
           <p className="mb-4">
-            At <strong>Raw Halal Chicken</strong>, we take pride in being a small-scale business dedicated to providing fresh, tender, and juicy products. For the past four years, we have been bringing fresh raw chicken, mutton, and fish to your table. Our online store allows you to conveniently purchase 100% fresh, never-frozen meat and seafood.
+            We are dedicated to providing tender and juicy products like Raw Fresh Chicken, Fish, Goat Mutton and Meat. For the past four years, we have been bringing fresh raw chicken, mutton, and fish to your table. Our online store allows you to conveniently purchase 100% fresh, never-frozen Chicken, meat and Mutton, seafood. When you place an order, you can check if the product is fresh or not. We offer an easy return policy for all products.
           </p>
-          <p>
-            As a leading online company, we are committed to offering the finest quality. Our products are sourced from fresh slaughter and processed just a few hours before being delivered to your doorstep, ensuring hygiene and quality at every step.
+          <p className="mb-4">
+            We are a leading online company committed to offering our customers the finest quality ever. Our products are sourced fresh and processed just a few hours before being delivered to your doorstep, ensuring hygiene and quality at every step.
           </p>
         </section>
 
         {/* How It Works Section */}
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-black pb-2 inline-block">
-            How Your Order Reaches You
+            Our Delivery Commitment
           </h2>
-          <p className="text-gray-800 leading-relaxed">
-            When you place an order with us, we guarantee a <strong>one-hour delivery</strong>. Our team ensures that the products are fresh and hygienically processed shortly before being handed over to our delivery executive.
+          <p className="text-gray-800 leading-relaxed mb-3">
+            When you place an order with us, we commit to you <strong>one-hour delivery</strong>. After receiving your order for Raw fresh chicken, fresh meat and Mutton, we will ensure that products are fresh and hygienically processed shortly before being handed over to our delivery executive.
           </p>
         </section>
 
@@ -116,11 +117,11 @@ const AboutUs = () => {
         <section className="mb-10 md:flex md:gap-10 space-y-8 md:space-y-0">
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-black pb-2 inline-block">Our Vision</h2>
-            <p className="text-gray-800 leading-relaxed">To provide ever-fresh, high-quality, and healthier options of chicken, mutton, and fish through sustainable practices. We aim to become a trusted brand known for quality and safety.</p>
+            <p className="text-gray-800 leading-relaxed">To provide fresh and high quality, healthier Fresh chicken, mutton, and fish through sustainable practices. We aim to become a trusted brand known for quality and safety.</p>
           </div>
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b-2 border-black pb-2 inline-block">Our Mission</h2>
-            <p className="text-gray-800 leading-relaxed">To expand our product range and delivery zones to ensure quick delivery and superior customer service, helping our customers live a healthier lifestyle.</p>
+            <p className="text-gray-800 leading-relaxed">To expand more product range and delivery zones to ensure quick delivery and superior customer service, helping our customers live a healthier lifestyle.</p>
           </div>
         </section>
 
