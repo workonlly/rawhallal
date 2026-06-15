@@ -73,8 +73,7 @@ export default function Home() {
               slidesPerView={1}
               loop={true}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
-              pagination={{ clickable: true }}
-              modules={[Autoplay, Pagination]}
+              modules={[Autoplay]}
               className="w-full h-[250px] md:h-[400px]"
             >
               {allImages.map((url, idx) => (
