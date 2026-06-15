@@ -8,6 +8,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useDispatch } from 'react-redux';
 import { setSelectedProduct } from './store/productSlice';
+import { addItem } from './store/cartSlice';
 import { useRouter } from 'next/navigation';
 import Footer from './components/footer';
 
@@ -149,17 +150,36 @@ function Chicken() {
                       </div>
                     </div>
 
-                    {/* WhatsApp Button */}
-                    <div className="mt-4">
+                    {/* Action Buttons (Stops propagation so it doesn't trigger the card click route) */}
+                    <div className="mt-4 flex gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          dispatch(addItem({
+                            id: String(items.id),
+                            name: items.maintext,
+                            price: items.price,
+                            quantity: 1,
+                            table: 'chicken',
+                            image: urls.length > 0 ? urls[0] : undefined
+                          }));
+                        }}
+                        className="flex-1 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-bold flex justify-center items-center gap-2 hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Add to Cart
+                      </button>
                       <a
                         href={`http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order%20${encodeURIComponent(items.maintext)}`}
                         onClick={(e) => e.stopPropagation()} 
-                        className="w-full py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-bold flex justify-center items-center gap-2 hover:bg-[#1ebd5b] transition-all duration-300 shadow-sm hover:shadow-md"
+                        className="flex-1 py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-bold flex justify-center items-center gap-2 hover:bg-[#1ebd5b] transition-all duration-300 shadow-sm hover:shadow-md"
                         target="_blank" 
                         rel="noopener noreferrer"
                       >
                         <img src="/WhatsApp.svg.webp" alt="whatsapp" className="h-5 w-5" />
-                        Order on WhatsApp
+                        WhatsApp
                       </a>
                     </div>
                   </div>

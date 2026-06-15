@@ -2,12 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { CartItem } from '../store/cartSlice';
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const cartItems = useSelector((state: any) => state.cart.items as CartItem[]);
+  const totalItems = cartItems.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
 
   // Add a slight shadow when scrolling down
   useEffect(() => {
@@ -43,8 +49,8 @@ const Navbar: React.FC = () => {
         <div className="flex items-center md:order-2 space-x-2 md:space-x-4 rtl:space-x-reverse relative">
           
           {/* Shopping Bag Button */}
-          <button 
-            type="button" 
+          <Link 
+            href="/cart"
             className="text-gray-600 hover:text-red-600 hover:bg-red-50 p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-100 relative"
             aria-label="Shopping bag"
           >
@@ -59,42 +65,23 @@ const Navbar: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
             {/* Notification badge */}
-            <span className="absolute top-1 right-1 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-600 border-2 border-white rounded-full">
-              2
-            </span>
-          </button>
-
-          {/* User Profile Button */}
-          <div className="relative">
-            <button
-              type="button"
-              className="flex text-sm bg-gray-100 rounded-full focus:ring-4 focus:ring-red-100 transition-shadow duration-200 hover:shadow-md"
-              id="user-menu-button"
-              aria-expanded={isUserDropdownOpen}
-              onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-            >
-              <span className="sr-only">Open user menu</span>
-              <img className="w-9 h-9 rounded-full object-cover border-2 border-white" src="/docs/images/people/profile-picture-5.jpg" alt="user photo" />
-            </button>
-
-            {/* User Dropdown Menu */}
-            {isUserDropdownOpen && (
-              <div className="absolute top-12 right-0 z-50 bg-white border border-gray-100 rounded-xl shadow-xl w-56 mt-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="px-4 py-3 bg-gray-50 border-b border-gray-100">
-                  <span className="block text-sm font-semibold text-gray-900">Joseph McFall</span>
-                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
-                </div>
-                <ul className="py-2 text-sm text-gray-700" aria-labelledby="user-menu-button">
-                  <li><a href="#" className="flex px-4 py-2 hover:bg-red-50 hover:text-red-600 transition-colors">Dashboard</a></li>
-                  <li><a href="#" className="flex px-4 py-2 hover:bg-red-50 hover:text-red-600 transition-colors">Settings</a></li>
-                  <li><a href="#" className="flex px-4 py-2 hover:bg-red-50 hover:text-red-600 transition-colors">Your Orders</a></li>
-                  <li className="border-t border-gray-100 mt-1 pt-1">
-                    <a href="#" className="flex px-4 py-2 hover:bg-red-50 hover:text-red-600 transition-colors font-medium">Sign out</a>
-                  </li>
-                </ul>
-              </div>
+            {totalItems > 0 && (
+              <span className="absolute top-1 right-1 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-600 border-2 border-white rounded-full">
+                {totalItems}
+              </span>
             )}
-          </div>
+          </Link>
+
+          {/* User Profile / Login */}
+          <button
+            type="button"
+            className="text-gray-600 hover:text-red-600 hover:bg-red-50 p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-100"
+            aria-label="User profile"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+            </svg>
+          </button>
 
           {/* Mobile Menu Toggle Button */}
           <button
