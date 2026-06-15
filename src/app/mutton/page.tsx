@@ -1,5 +1,6 @@
 import supabase from "../../../supabase";
 import MobileMenu from "../components/MobileMenu";
+import Heading from "../components/heading";
 
 export async function generateMetadata() {
 
@@ -79,66 +80,10 @@ export async function generateMetadata() {
 
 import Mutton from "../mutton";
 export default async function PageContent() {
-  // Get the specific row by ID only
-  const { data, error } = await supabase
-    .from('title')
-    .select('*')
-    .eq('id', 112) 
-    .single();
-
-  const pageHeading = data?.heading || 'Fresh and halal chicken products';
-
   return (
-    <div className='relative h-screen w-screen'>
-      {/* Mobile Menu */}
-      <MobileMenu />
-      
-      <div className='animated-bg h-screen w-screen relative p-1'>
-        {/* black background screen here */}
-        <div className='bg-black h-full w-full rounded-md relative flex flex-col lg:flex-row items-center p-1'>
-          {/* 2 column working start */}
-          {/* 1st div - Desktop Sidebar (hidden on mobile) */}
-          <div className="hidden lg:block w-full lg:w-[15%] h-full border-2 border-[#14213d] backdrop-blur-md rounded-md lg:mr-1"> {/*main div */} 
-            <div className="w-[100%] h-full rounded-sm p-[5px] flex flex-col gap-3 backdrop-blur-md overflow-y-auto"> {/*alining div */}
-            <div className="animated-bg h-[10vh] p-[5vh] flex flex-col justify-center items-center font-bold rounded-xl text-white  ">Raw  Chicken </div>
-              <div className="flex flex-col gap-2">
-               <a href="/"> <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center  pl-5 rounded-r-xl  font-semibold hover:shadow-xl">🏠Home</div> </a>             
-                <a href="/chicken" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center  font-semibold ml-5 " > 🍗Chicken</div></a>
-                <a href="/fish" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold ml-5 " > 🐟Raw fresh fish</div></a>
-                <a href="/mutton" className=""><div className="hover:bg-[#00b4d8] text-white h-[10vh] bg-white/10 backdrop-blur-md shadow-xl  flex flex-col justify-center font-semibold text-[15px] ml-5 " > 🐐Raw fresh mutton</div></a>
-               <a href="/contact"> <div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">🤝  Contact us</div></a>
-                <a href="/bhiryani" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl"   >🤝  Bhiryani</div></a>
-                <a href="/aboutus" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">ABOUT US</div></a>
-                <a href="/privacypolicy" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">PRIVACY POLICY</div></a>
-                <a href="/termsandconditions" className=""><div className="hover:bg-[#fb5607] text-white h-[10vh] flex flex-col justify-center pl-5 rounded-r-xl font-semibold hover:backdrop-blur-xl">TERMS & CONDITIONS</div></a>
-              </div>
-            </div>
-          </div> 
-          {/* 1st div end */}
-          {/* 2nd div - Main Content Area (full width on mobile) */}
-          <div className="w-full lg:w-[90%] h-full pb-1 backdrop-blur-md rounded-sm relative">  
-            {/* main logo area */}
-            <div className="flex flex-row justify-center items-center h-20 pt-4 lg:pt-0">
-              <a href="/"><img src="/fdrd-removebg-preview-modified.png" alt="Raw Halal Chicken Logo" className="absolute w-[50px] h-[50px] rounded-tl-lg rounded-br-lg bg-white left-2 top-2 box lg:left-2 lg:top-2" /></a>
-              <p className='text-white text-sm sm:text-base md:text-lg lg:text-2xl font-bold text-center px-14 sm:px-16 lg:px-0 break-words'>{pageHeading}</p>
-            </div>
-            {/* main logo area end */}
-            <div className="h-[2px]  animated-bg absolute w-[93%]  right-0"></div>
-           
-    
-             {/* working area */}
-             <Mutton></Mutton>
-
-             {/* working area end */}
-          
-         
-          </div>
-          {/* 2nd div end */}
-          {/* 2 cloumn working here end */}
-        </div>
-        {/* black screen end here */}
-      </div>
-     
+    <div className='relative h-screen w-full'>
+      <Heading int={112}></Heading>
+      <Mutton></Mutton>
     </div>
   );
 } 

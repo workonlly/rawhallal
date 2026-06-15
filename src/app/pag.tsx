@@ -1,26 +1,24 @@
 'use client';
-import { useEffect, useState } from 'react'
-import supabase  from '../../supabase'
+import { useEffect, useState } from 'react';
+import supabase from '../../supabase';
 import { fresh } from './data/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/pagination';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from './store/productSlice'; // Corrected path
+import { setSelectedProduct } from './store/productSlice';
 import { useRouter } from 'next/navigation';
 import { SelectedProduct } from './store/types';
-import Footer from './footer';
-
-
-
+import Direct from './components/direct';
+import Categories from './components/categories';
 
 interface Product {
   id: number;
   maintext: string;
   sectext: string;
-  price:number;
+  price: number;
 }
-
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -30,144 +28,178 @@ export default function Home() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data, error } = await supabase.from('fresh1').select('*')
-      if (error) console.error('Error:', error)
-      else setProducts(data as Product[])
+      const { data, error } = await supabase.from('fresh1').select('*');
+      if (error) console.error('Error:', error);
+      else setProducts(data as Product[]);
     };
     fetchProducts();
-    fresh().then(setFolderMap)
+    fresh().then(setFolderMap);
   }, []);
 
-
-  // Function to create a URL-safe slug from product.maintext with reversible icons
+  // Function to create a URL-safe slug
   function toSlug(text: string) {
     return text
-      .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
-      .replace(/[\/\\]/g, '_SLASH_') // Replace slashes with _SLASH_
-      .replace(/[()]/g, '_PAREN_') // Replace parentheses with _PAREN_
-      .replace(/[&]/g, '_AND_') // Replace & with _AND_
-      .replace(/[#]/g, '_HASH_') // Replace # with _HASH_
-      .replace(/[@]/g, '_AT_') // Replace @ with _AT_
-      .replace(/[%]/g, '_PERCENT_') // Replace % with _PERCENT_
-      .replace(/[+]/g, '_PLUS_') // Replace + with _PLUS_
-      .replace(/[=]/g, '_EQUALS_') // Replace = with _EQUALS_
-      .replace(/[?]/g, '_QUESTION_') // Replace ? with _QUESTION_
-      .replace(/[!]/g, '_EXCLAMATION_') // Replace ! with _EXCLAMATION_
-      .replace(/[$]/g, '_DOLLAR_') // Replace $ with _DOLLAR_
-      .replace(/[*]/g, '_STAR_') // Replace * with _STAR_
-      .replace(/[,]/g, '_COMMA_') // Replace , with _COMMA_
-      .replace(/[.]/g, '_DOT_') // Replace . with _DOT_
-      .replace(/[:]/g, '_COLON_') // Replace : with _COLON_
-      .replace(/[;]/g, '_SEMICOLON_'); // Replace ; with _SEMICOLON_
+      .replace(/\s+/g, '_SPACE_')
+      .replace(/[\/\\]/g, '_SLASH_')
+      .replace(/[()]/g, '_PAREN_')
+      .replace(/[&]/g, '_AND_')
+      .replace(/[#]/g, '_HASH_')
+      .replace(/[@]/g, '_AT_')
+      .replace(/[%]/g, '_PERCENT_')
+      .replace(/[+]/g, '_PLUS_')
+      .replace(/[=]/g, '_EQUALS_')
+      .replace(/[?]/g, '_QUESTION_')
+      .replace(/[!]/g, '_EXCLAMATION_')
+      .replace(/[$]/g, '_DOLLAR_')
+      .replace(/[*]/g, '_STAR_')
+      .replace(/[,]/g, '_COMMA_')
+      .replace(/[.]/g, '_DOT_')
+      .replace(/[:]/g, '_COLON_')
+      .replace(/[;]/g, '_SEMICOLON_');
   }
 
+  // Get all images for the top banner
+  const allImages = Object.values(folderMap).flat();
 
   return (
-    <div className="   bg-white/20 w-full   text-center overflow-auto rounded-sm scrollbar-custom  ">
-      <main className="">
-      
-        <div className="swiper mt-5">
-          {/* Swiper for all images from all folders */}
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{ delay: 1500, disableOnInteraction: false }}
-            modules={[Autoplay]}
-            style={{ width: '100%', height: '320px', maxWidth: 900, margin: '0 auto' }}
-          >
-            {Object.values(folderMap).flat().map((url, idx) => (
-              <SwiperSlide key={url + idx}>
-                <img
-                  src={url}
-                  alt="All images"
-                  style={{
-                    width: '100%',
-                    height: '320px',
-                    objectFit: 'contain',
-                    borderRadius: '12px',
-                    background: '#f3f3f3',
-                    display: 'block',
-                  }}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+    <div className="bg-gray-50 min-h-screen w-full pb-12 pt-20">
+      <main className="max-w-screen-xl mx-auto px-4 sm:px-6">
+        
+        {/* Top Hero Banner */}
+        {allImages.length > 0 && (
+          <div className=" mb-12 rounded-3xl overflow-hidden shadow-sm border border-gray-100 bg-white relative group">
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              loop={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              modules={[Autoplay, Pagination]}
+              className="w-full h-[250px] md:h-[400px]"
+            >
+              {allImages.map((url, idx) => (
+                <SwiperSlide key={url + idx}>
+                  <div className="w-full h-full bg-gray-100 flex items-center justify-center relative">
+                    <img
+                      src={url}
+                      alt="Featured product"
+                      className="w-full h-full object-cover md:object-contain"
+                    />
+                    {/* Subtle gradient overlay to make it look premium */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )}
+
+        {/* Categories Section */}
+        <Categories />
+
+        {/* Features Header */}
+        <div className="mt-16 mb-8 text-center md:text-left flex items-center gap-4">
+          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Featured <span className="text-red-600">Products</span>
+          </h2>
+          <div className="hidden md:block h-px bg-gray-200 flex-1"></div>
         </div>
-        <div className="text-3xl font-bold text-white m-5 ">Features</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-5">
+
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {products.map((product) => {
             const folderName = String(product.id);
             const urls = folderMap[folderName] || [];
+            
             return (
               <div
                 key={product.id}
-                className="bg-white/90 p-4 rounded-2xl shadow-lg flex flex-col items-center justify-between border border-green-100 hover:scale-105 transition-transform duration-300 hover:shadow-xl min-h-[520px] max-h-[580px] h-full cursor-pointer"
-                style={{ boxSizing: 'border-box' }}
+                className="group flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer relative"
                 onClick={() => {
                   dispatch(setSelectedProduct({
                     id: product.id,
-                    table: 'fresh', 
+                    table: 'fresh',
                     maintext: product.maintext,
                     sectext: product.sectext,
                     price: product.price,
                     image: urls,
                   } as SelectedProduct));
                   const slug = toSlug(product.maintext);
-                  router.push(`/${encodeURIComponent(slug)}`); // Route to new [slug] page
+                  router.push(`/${encodeURIComponent(slug)}`);
                 }}
               >
-                <div className="w-full flex justify-center items-center mb-3">
+                {/* Product Image Carousel */}
+                <div className="w-full h-[220px] bg-gray-50 relative overflow-hidden border-b border-gray-50">
                   <Swiper
-                    spaceBetween={10}
+                    spaceBetween={0}
                     slidesPerView={1}
-                    loop={true}
+                    loop={urls.length > 1}
                     autoplay={{ delay: 2500, disableOnInteraction: false }}
                     modules={[Autoplay]}
-                    style={{ width: '100%', maxWidth: 260, minHeight: 140, maxHeight: 180 }}
+                    className="w-full h-full"
                   >
                     {urls.length > 0 ? (
                       urls.map((url) => (
                         <SwiperSlide key={url}>
                           <img
                             src={url}
-                            alt={folderName}
-                            className="w-full h-[140px] object-contain rounded border border-green-100 bg-white shadow"
+                            alt={product.maintext}
+                            className="w-full h-full object-contain p-4 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
                           />
                         </SwiperSlide>
                       ))
                     ) : (
                       <SwiperSlide>
-                        <div className="flex items-center justify-center h-[140px] text-gray-400">No images</div>
+                        <div className="flex flex-col items-center justify-center h-full text-gray-400">
+                          <svg className="w-10 h-10 mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span className="text-sm font-medium">No image available</span>
+                        </div>
                       </SwiperSlide>
                     )}
                   </Swiper>
                 </div>
-                <div className="flex-1 flex flex-col justify-center w-full">
-                  <div className="text-xl font-bold text-black text-center mb-1 truncate w-full">{product.maintext}</div>
-                  <div className="text-sm text-gray-700 text-center px-2 mb-2 line-clamp-2 w-full">{product.sectext}</div>
+
+                {/* Product Info */}
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors">
+                    {product.maintext}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1 line-clamp-2 flex-1 min-h-[40px]">
+                    {product.sectext}
+                  </p>
+                  
+                  <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                      <span className="text-xs text-gray-400 font-medium uppercase tracking-wider block mb-0.5">Price</span>
+                      <span className="text-xl font-extrabold text-gray-900">₹{product.price}</span>
+                    </div>
+                  </div>
+
+                  {/* WhatsApp Button (Stops propagation so it doesn't trigger the card click route) */}
+                  <div className="mt-4">
+                    <a
+                      href={`http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order%20${encodeURIComponent(product.maintext)}`}
+                      onClick={(e) => e.stopPropagation()} 
+                      className="w-full py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-bold flex justify-center items-center gap-2 hover:bg-[#1ebd5b] transition-all duration-300 shadow-sm hover:shadow-md"
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <img src="/WhatsApp.svg.webp" alt="whatsapp" className="h-5 w-5" />
+                      Order on WhatsApp
+                    </a>
+                  </div>
                 </div>
-                <div className="w-full mt-2 flex flex-col items-center">
-                  <div className="text-lg font-bold text-green-700 mb-2">₹{product.price}</div>
-                  <a
-                    href="http://api.whatsapp.com/send?phone=919911296615&text=Hi%20I%20Want%20To%20Order"
-                    className="w-full h-[48px] rounded-lg bg-green-500 text-white font-bold flex justify-center items-center hover:bg-green-600 transition-all duration-300 shadow-md"
-                    target="_blank" rel="noopener noreferrer"
-                  >
-                    Order via WhatsApp
-                    <img
-                      src="/WhatsApp.svg.webp"
-                      alt="whatsapp"
-                      className="h-[22px] ml-2"
-                    />
-                  </a>
-                </div>
+
               </div>
             );
           })}
-           
         </div>
-        <Footer />
+
+        {/* Direct CTA Component */}
+        <Direct />
+        
       </main>
     </div>
   );

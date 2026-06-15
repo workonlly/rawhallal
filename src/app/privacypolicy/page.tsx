@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../footer';
+import Footer from '../components/footer';
 import MobileMenu from '../components/MobileMenu';
 import type { Metadata } from 'next';
 
