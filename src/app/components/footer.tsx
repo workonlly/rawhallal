@@ -15,6 +15,7 @@ function Footer() {
     { label: 'Raw Fresh Fish', action: 'fish', path: '/fish', hash: '#fish' },
     { label: 'Raw Fresh Mutton', action: 'mutton', path: '/mutton', hash: '#mutton' },
     { label: 'Contact Us', action: 'contact', path: '/contact' },
+    { label: 'Our Stories', action: 'stories', path: '/ourStories' },
   ];
 
   return (
