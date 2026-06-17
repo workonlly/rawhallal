@@ -115,7 +115,7 @@ export default function OpenPage({ productFromServer }: OpenPageProps) {
               
               {/* Category Badge */}
               <div className="mb-2 md:mb-4">
-                <span className="inline-flex items-center px-2 py-1 md:px-3.5 md:py-1.5 rounded-full bg-red-50 text-red-600 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-red-100">
+                <span className="inline-flex items-center  px-2 py-1 md:px-3.5 md:py-1.5 rounded-full bg-red-50 text-red-600 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-red-100">
                   {product.table}
                 </span>
               </div>
@@ -124,7 +124,7 @@ export default function OpenPage({ productFromServer }: OpenPageProps) {
               <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-2 md:mb-4">
                 {product.maintext}
               </h1>
-              <p className="text-xs sm:text-sm md:text-lg text-gray-500 leading-snug md:leading-relaxed mb-4 md:mb-8 line-clamp-3 md:line-clamp-none">
+              <p className="text-xs sm:text-sm md:text-lg text-gray-500 leading-snug md:leading-relaxed mb-4 md:mb-8 line-clamp-7 md:line-clamp-none">
                 {product.sectext}
               </p>
 
