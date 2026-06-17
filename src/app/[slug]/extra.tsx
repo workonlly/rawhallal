@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useState } from 'react';
 type ProductData = SelectedProduct & {
   heading?: string;
   metadata?: string;
@@ -23,6 +24,7 @@ export default function OpenPage({ productFromServer }: OpenPageProps) {
   const productFromStore = useSelector(selectSelectedProduct) as ProductData | null;
   const product = productFromStore ?? productFromServer ?? null;
   const router = useRouter();
+  const[more,setmore]=useState(false)
 
   if (!product) return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
@@ -124,9 +126,17 @@ export default function OpenPage({ productFromServer }: OpenPageProps) {
               <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-2 md:mb-4">
                 {product.maintext}
               </h1>
-              <p className="text-xs sm:text-sm md:text-lg text-gray-500 leading-snug md:leading-relaxed mb-4 md:mb-8 line-clamp-7 md:line-clamp-none">
-                {product.sectext}
-              </p>
+              <div className="mb-4 md:mb-8">
+                <p className={`text-xs sm:text-sm md:text-lg text-gray-500 leading-snug md:leading-relaxed ${more ? 'line-clamp-none' : 'line-clamp-4'} md:line-clamp-none`}>
+                  {product.sectext} 
+                </p>
+                <button 
+                  onClick={() => setmore(!more)} 
+                  className="md:hidden text-red-500 font-bold text-xs mt-1"
+                >
+                  {more ? 'Show Less' : 'Show More'}
+                </button>
+              </div>
 
               {/* Price Tag */}
               <div className="flex items-end gap-2 md:gap-3 mb-4 md:mb-10 pb-4 md:pb-10 border-b border-gray-100">
