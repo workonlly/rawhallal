@@ -35,6 +35,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "ButcherShop",
+    "@id": "https://rawhalalchicken.com",
+    "name": "Raw Halal Chicken",
+    "url": "https://rawhalalchicken.com",
+    "telephone": "+91-9911296615",
+    "description": "Premium farm-fresh raw chicken and halal mutton home delivery service in Noida.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "27 shop number 3, F, 4, Fatehpur, F Block, Sector 50",
+      "addressLocality": "Noida",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "201303",
+      "addressCountry": "IN"
+    }
+  };
   return (
     <html lang="en">
              <body
@@ -53,6 +70,16 @@ export default function RootLayout({
             gtag('config', 'G-36H4F1S7Y9');
           `}
         </Script>
+        
+        {/* Next.js Optimized Schema Injection */}
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify(localBusinessSchema)}
+        </Script>
+
         <ReduxProvider>
            <Header></Header>
            {children}
