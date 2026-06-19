@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import supabase from '../../supabase.js';
 
-// Function to create a URL-safe slug from product.maintext (same as web folder)
+// Function to create a URL-safe slug from product.maintext
 function toSlug(text: string) {
   return text
     .replace(/\s+/g, '_SPACE_') // Replace spaces with _SPACE_
@@ -46,8 +46,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       if (products && products.length > 0) {
         // Generate product URLs from database using maintext field
+        // Updated to use the root /[slug] structure instead of /open/[slug]
         const tableProductUrls = products.map((product: any) => ({
-          url: `${baseUrl}/open/${toSlug(product.maintext)}`,
+          url: `${baseUrl}/${toSlug(product.maintext)}`,
           lastModified: new Date(product.updated_at || product.created_at || Date.now()),
           changeFrequency: 'weekly' as const,
           priority: 0.7,
@@ -60,9 +61,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error in sitemap generation:', error);
   }
 
-  // Static URLs
+  // Static URLs updated to match the new root-level structure
   const staticUrls: MetadataRoute.Sitemap = [
-    // Main Pages
+    // Main Page
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -70,86 +71,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     
-    // Web Version Pages
+    // Product Categories
     {
-      url: `${baseUrl}/web`,
+      url: `${baseUrl}/chicken`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/web/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    
-    // Web Product Categories
-    {
-      url: `${baseUrl}/web/chicken`,
+      url: `${baseUrl}/fish`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/web/fish`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/web/mutton`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/web/bhiryani`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    
-    // Mobile Version Pages
-    {
-      url: `${baseUrl}/mobile`,
+      url: `${baseUrl}/mutton`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     
-    // Mobile Product Categories
-    {
-      url: `${baseUrl}/mobile/chicken`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/mobile/fish`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/mobile/mutton`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/mobile/bhiryani`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    
-    // Legal Pages
+    // Information & Legal Pages
     {
       url: `${baseUrl}/aboutus`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ourStories`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/privacypolicy`,
@@ -162,56 +121,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
-    },
-    
-    // Admin Pages
-    {
-      url: `${baseUrl}/admin`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    
-    // Mapped URLs from vercel.json redirects and rewrites
-    {
-      url: `${baseUrl}/contactus`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-
-    // API Routes (if you want them indexed)
-    {
-      url: `${baseUrl}/api`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.2,
-    },
-
-    // Static Assets
-    {
-      url: `${baseUrl}/sitemap.xml`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/robots.txt`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.1,
     },
   ];
 
