@@ -97,7 +97,7 @@ export default function RefundPolicy() {
               <div className="mt-4 space-y-2">
                 <p><strong>Website:</strong> <a href="https://rawhalalchicken.com" className="hover:underline">rawhalalchicken.com</a></p>
                 <p><strong>Email:</strong> <a href="mailto:Rawhalalchicken@gmail.com" className="hover:underline">Rawhalalchicken@gmail.com</a></p>
-                <p><strong>Phone:</strong> <a href="tel:+919891512135" className="hover:underline">+91 98915 12135</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+9911296615" className="hover:underline">+9911296615</a></p>
               </div>
             </div>
           </section>
