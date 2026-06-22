@@ -114,6 +114,7 @@ function Footer() {
               <Link href="/aboutus" className="text-gray-600 hover:text-red-600 hover:translate-x-1 inline-block transition-all duration-200">About Us</Link>
               <Link href="/privacypolicy" className="text-gray-600 hover:text-red-600 hover:translate-x-1 inline-block transition-all duration-200">Privacy Policy</Link>
               <Link href="/termsandconditions" className="text-gray-600 hover:text-red-600 hover:translate-x-1 inline-block transition-all duration-200">Terms & Conditions</Link>
+              <Link href="/refund_policy" className="text-gray-600 hover:text-red-600 hover:translate-x-1 inline-block transition-all duration-200">Refund & Policy </Link>
             </div>
           </div>
 
