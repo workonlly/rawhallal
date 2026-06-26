@@ -53,7 +53,7 @@ export default function Direct() {
           <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-500">
             {/* Replace with your actual delivery or fresh meat image */}
             <img 
-              src="https://images.unsplash.com/photo-1557844352-761f2565b576?auto=format&fit=crop&q=80&w=800" 
+              src="/lfg.png" 
               alt="Direct delivery of fresh meat" 
               className="w-full h-full object-cover"
             />
