@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ReduxProvider from './store/Provider'; // Adjust path if needed
+import ReduxProvider from './store/Provider'; 
 import Script from "next/script";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -16,78 +16,54 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// 1. एआई सर्च के लिए स्कीमा डेटा ऑब्जेक्ट
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'ButcherShop',
+  'name': 'Raw Halal Chicken & Meat Home Delivery',
+  'image': 'https://rawhalalchicken.com', 
+  'url': 'https://rawhalalchicken.com',
+  'telephone': '+919911296615',
+  'priceRange': '₹₹',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': '27, Shop Number 3, F Block, Fatehpur, Sector 50',
+    'addressLocality': 'Noida',
+    'addressRegion': 'Uttar Pradesh',
+    'postalCode': '201303',
+    'addressCountry': 'IN'
+  },
+  'geo': {
+    '@type': 'GeoCoordinates',
+    'latitude': '28.5700',  
+    'longitude': '77.3662'  
+  },
+  'openingHoursSpecification': {
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+    ],
+    'opens': '10:00',
+    'closes': '22:00'
+  },
+  'areaServed': [
+    { '@type': 'AdministrativeArea', 'name': 'Noida' },
+    { '@type': 'AdministrativeArea', 'name': 'Greater Noida' },
+    { '@type': 'AdministrativeArea', 'name': 'Delhi NCR' }
+  ]
+};
 
-
-
+// 2. Next.js का ऑफिशियल तरीका: 'script.ld+json' को metadata के अंदर डालना
 export const metadata: Metadata = {
-
+  title: "Raw Halal Chicken & Meat Home Delivery",
+  description: "Buy 100% Fresh Raw Halal Chicken, Mutton & Fish Online in Noida.",
   other: {
     "facebook-domain-verification": "ohquze0krklooq0r5eufurw4oky3b8",
     "p:domain_verify": "7402d4a3b47fbed3cfbdb0b8674cc9d3",
     "yandex-verification": "b1aec977ba6a26bf",
-    "msvalidate.01":"9ADFE7C80958C9A5FC9EB422DAF1E1A7",
-    "google-site-verification":"gMej0a7XTL3IsRLC_6OXtm9sP8Rl8TykZrkyxlxqOls",
+    "msvalidate.01": "9ADFE7C80958C9A5FC9EB422DAF1E1A7",
+    "google-site-verification": "gMej0a7XTL3IsRLC_6OXtm9sP8Rl8TykZrkyxlxqOls",
   },
-};
-
-const ChickenStoreSchema = () => {
-  const schemaData = {
-    '@context': 'https://schema.org',
-    '@type': 'ButcherShop',
-    'name': 'Raw Halal Chicken & Meat Home Delivery',
-    'image': 'https://rawhalalchicken.com', // अपने बैनर का सही पाथ डालें
-    'url': 'https://rawhalalchicken.com',
-    'telephone': '+919911296615',
-    'priceRange': '₹₹',
-    'address': {
-      '@type': 'PostalAddress',
-      'streetAddress': '27, Shop Number 3, F Block, Fatehpur, Sector 50',
-      'addressLocality': 'Noida',
-      'addressRegion': 'Uttar Pradesh',
-      'postalCode': '201303',
-      'addressCountry': 'IN'
-    },
-    'geo': {
-      '@type': 'GeoCoordinates',
-      'latitude': '28.5700',  // नोएडा सेक्टर 50 की सही अक्षांश
-      'longitude': '77.3662'  // नोएडा सेक्टर 50 की सही देशांतर
-    },
-    'openingHoursSpecification': {
-      '@type': 'OpeningHoursSpecification',
-      'dayOfWeek': [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ],
-      'opens': '10:00',
-      'closes': '22:00'
-    },
-    'areaServed': [
-      {
-        '@type': 'AdministrativeArea',
-        'name': 'Noida'
-      },
-      {
-        '@type': 'AdministrativeArea',
-        'name': 'Greater Noida'
-      },
-      {
-        '@type': 'AdministrativeArea',
-        'name': 'Delhi NCR'
-      }
-    ]
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
-  );
 };
 
 export default function RootLayout({
@@ -97,9 +73,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-             <body
-         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-       >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-36H4F1S7Y9"
@@ -114,8 +94,7 @@ export default function RootLayout({
           `}
         </Script>
         
-        {/* Next.js Optimized Schema Injection */}
-        <ChickenStoreSchema />
+        {/* Microsoft Clarity */}
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
@@ -127,9 +106,9 @@ export default function RootLayout({
         </Script>
 
         <ReduxProvider>
-           <Header></Header>
+           <Header />
            {children}
-           <Footer></Footer>
+           <Footer />
         </ReduxProvider>
       </body>
     </html>
