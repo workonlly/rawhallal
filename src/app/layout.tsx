@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const revalidate = 30; // Revalidate metadata and pages every 30 seconds
+
 
 
 export const metadata: Metadata = {
