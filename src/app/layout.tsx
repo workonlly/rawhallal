@@ -30,28 +30,71 @@ export const metadata: Metadata = {
   },
 };
 
+const ChickenStoreSchema = () => {
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'ButcherShop',
+    'name': 'Raw Halal Chicken & Meat Home Delivery',
+    'image': 'https://rawhalalchicken.com', // अपने बैनर का सही पाथ डालें
+    'url': 'https://rawhalalchicken.com',
+    'telephone': '+919911296615',
+    'priceRange': '₹₹',
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': '27, Shop Number 3, F Block, Fatehpur, Sector 50',
+      'addressLocality': 'Noida',
+      'addressRegion': 'Uttar Pradesh',
+      'postalCode': '201303',
+      'addressCountry': 'IN'
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': '28.5700',  // नोएडा सेक्टर 50 की सही अक्षांश
+      'longitude': '77.3662'  // नोएडा सेक्टर 50 की सही देशांतर
+    },
+    'openingHoursSpecification': {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ],
+      'opens': '10:00',
+      'closes': '22:00'
+    },
+    'areaServed': [
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Noida'
+      },
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Greater Noida'
+      },
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Delhi NCR'
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "ButcherShop",
-    "@id": "https://rawhalalchicken.com",
-    "name": "Raw Halal Chicken",
-    "url": "https://rawhalalchicken.com",
-    "telephone": "+91-9911296615",
-    "description": "Premium farm-fresh raw chicken and halal mutton home delivery service in Noida.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "27 shop number 3, F, 4, Fatehpur, F Block, Sector 50",
-      "addressLocality": "Noida",
-      "addressRegion": "Uttar Pradesh",
-      "postalCode": "201303",
-      "addressCountry": "IN"
-    }
-  };
   return (
     <html lang="en">
              <body
@@ -72,13 +115,7 @@ export default function RootLayout({
         </Script>
         
         {/* Next.js Optimized Schema Injection */}
-        <Script
-          id="local-business-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-        >
-          {JSON.stringify(localBusinessSchema)}
-        </Script>
+        <ChickenStoreSchema />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
