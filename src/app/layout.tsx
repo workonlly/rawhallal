@@ -74,8 +74,15 @@ const schemaData = {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Product",
-          "name": "Fresh Halal Chicken",
-          "description": "Fresh never-frozen halal chicken home delivery in Noida and Delhi NCR."
+          "name": "Raw Halal Chicken",
+          "description": "Fresh never-frozen halal chicken home delivery in Noida and Delhi NCR.",
+          "offers": {
+            "@type": "Offer",
+            "price": "360",
+            "priceCurrency": "INR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://rawhalalchicken.com/chicken"
+          }
         }
       },
       {
@@ -83,7 +90,14 @@ const schemaData = {
         "itemOffered": {
           "@type": "Product",
           "name": "Desi Chicken",
-          "description": "Fresh desi chicken home delivery in Noida and Delhi NCR."
+          "description": "Fresh desi chicken home delivery in Noida and Delhi NCR.",
+          "offers": {
+            "@type": "Offer",
+            "price": "750",
+            "priceCurrency": "INR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://rawhalalchicken.com/chicken"
+          }
         }
       },
       {
@@ -91,7 +105,15 @@ const schemaData = {
         "itemOffered": {
           "@type": "Product",
           "name": "Fresh Halal Mutton",
-          "description": "Fresh never-frozen halal mutton home delivery in Noida and Delhi NCR."
+          "description": "Fresh never-frozen halal mutton home delivery in Noida and Delhi NCR.",
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "INR",
+            "lowPrice": "1000",
+            "highPrice": "1180",
+            "availability": "https://schema.org/InStock",
+            "url": "https://rawhalalchicken.com/mutton"
+          }
         }
       },
       {
@@ -99,7 +121,15 @@ const schemaData = {
         "itemOffered": {
           "@type": "Product",
           "name": "Fresh Fish",
-          "description": "Fresh fish home delivery in Noida, Greater Noida and Delhi NCR."
+          "description": "Fresh fish home delivery in Noida, Greater Noida and Delhi NCR.",
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "INR",
+            "lowPrice": "330",
+            "highPrice": "460",
+            "availability": "https://schema.org/InStock",
+            "url": "https://rawhalalchicken.com/fish"
+          }
         }
       }
     ]
@@ -107,14 +137,14 @@ const schemaData = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.7",
-    "reviewCount": "150",
+    "reviewCount": "137",
     "bestRating": "5",
     "worstRating": "1"
   },
   "sameAs": [
-    "https://www.facebook.com/rawhalalchicken",
-    "https://www.instagram.com/rawhalalchicken",
-    "https://g.page/YOUR_GOOGLE_BUSINESS_ID"
+    "https://www.instagram.com/rawhalalchicken.comm/",
+    "https://www.facebook.com/Rawhalalchicken.com0/",
+    "https://www.youtube.com/@rawhalalchicken"
   ]
 };
 
