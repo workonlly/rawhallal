@@ -23,7 +23,10 @@ const schemaData = {
   "name": "Raw Halal Chicken & Meat Home Delivery",
   "description": "Fresh halal chicken, mutton and fish home delivery in Noida, Greater Noida, Noida Extension, Gaur City and Delhi NCR.",
   "servesCuisine": "Halal",
-  "image": "https://rawhalalchicken.com/images/logo.webp",
+  "image": [
+    "https://rawhalalchicken.com/images/logo.webp",
+    "https://rawhalalchicken.com/fdrd-removebg-preview-modified.png"
+  ],
   "logo": {
     "@type": "ImageObject",
     "url": "https://rawhalalchicken.com/images/logo.webp"
@@ -152,6 +155,13 @@ const schemaData = {
 export const metadata: Metadata = {
   title: "Raw Halal Chicken & Meat Home Delivery",
   description: "Buy 100% Fresh Raw Halal Chicken, Mutton & Fish Online in Noida.",
+  openGraph: {
+    images: ['/fdrd-removebg-preview-modified.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/fdrd-removebg-preview-modified.png'],
+  },
   other: {
     "facebook-domain-verification": "ohquze0krklooq0r5eufurw4oky3b8",
     "p:domain_verify": "7402d4a3b47fbed3cfbdb0b8674cc9d3",
