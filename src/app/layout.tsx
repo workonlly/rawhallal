@@ -79,6 +79,7 @@ const schemaData = {
           "@type": "Product",
           "name": "Raw Halal Chicken",
           "description": "Fresh never-frozen halal chicken home delivery in Noida and Delhi NCR.",
+          "image": "https://rawhalalchicken.com/fdrd-removebg-preview-modified.png",
           "offers": {
             "@type": "Offer",
             "price": "360",
@@ -94,6 +95,7 @@ const schemaData = {
           "@type": "Product",
           "name": "Desi Chicken",
           "description": "Fresh desi chicken home delivery in Noida and Delhi NCR.",
+          "image": "https://rawhalalchicken.com/fdrd-removebg-preview-modified.png",
           "offers": {
             "@type": "Offer",
             "price": "750",
