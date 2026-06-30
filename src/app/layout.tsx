@@ -111,6 +111,7 @@ const schemaData = {
           "@type": "Product",
           "name": "Fresh Halal Mutton",
           "description": "Fresh never-frozen halal mutton home delivery in Noida and Delhi NCR.",
+          "image": "https://rawhalalchicken.com/fdrd-removebg-preview-modified.png",
           "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "INR",
@@ -127,6 +128,7 @@ const schemaData = {
           "@type": "Product",
           "name": "Fresh Fish",
           "description": "Fresh fish home delivery in Noida, Greater Noida and Delhi NCR.",
+          "image": "https://rawhalalchicken.com/fdrd-removebg-preview-modified.png",
           "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "INR",
